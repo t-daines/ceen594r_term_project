@@ -1,5 +1,5 @@
 --- 
-title: "Ramp Meter Wait Time Estimation"
+title: "Estimation of Ramp Meter Wait Time"
 author: "Tanner Daines"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
