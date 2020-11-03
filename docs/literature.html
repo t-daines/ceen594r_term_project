@@ -72,7 +72,10 @@
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Abstract</a></li>
 <li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
-<li class="chapter" data-level="3" data-path="literature.html"><a href="literature.html"><i class="fa fa-check"></i><b>3</b> Literature</a></li>
+<li class="chapter" data-level="3" data-path="literature.html"><a href="literature.html"><i class="fa fa-check"></i><b>3</b> Literature</a><ul>
+<li class="chapter" data-level="3.1" data-path="literature.html"><a href="literature.html#ramp-metering-design-and-implementation"><i class="fa fa-check"></i><b>3.1</b> Ramp Metering Design and Implementation</a></li>
+<li class="chapter" data-level="3.2" data-path="literature.html"><a href="literature.html#summary"><i class="fa fa-check"></i><b>3.2</b> Summary</a></li>
+</ul></li>
 <li class="chapter" data-level="4" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>4</b> Methods</a></li>
 <li class="chapter" data-level="5" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>5</b> Applications</a><ul>
 <li class="chapter" data-level="5.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>5.1</b> Example one</a></li>
@@ -102,8 +105,49 @@
             <section class="normal" id="section-">
 <div id="literature" class="section level1">
 <h1><span class="header-section-number">Chapter 3</span> Literature</h1>
-<p>Here is a review of existing methods.</p>
+<div id="ramp-metering-design-and-implementation" class="section level2">
+<h2><span class="header-section-number">3.1</span> Ramp Metering Design and Implementation</h2>
+<p>When freeway operations consistently deteriorate during peak hours, ramp meters are often implemented on the on-ramp, thus regulating the flow of vehicles entering the freeway. By controlling the flow of vehicles onto the freeway, they can travel in more favorable traffic conditions, which can reduce crashes, improve overall travel time, and lower emissions (Papageorgiou and Kotsialos 2002). However, although conditions on the freeway may improve when ramp meters are implemented, this often leads to increased wait time on the on-ramp. Several ramp metering algorithms have been used in an attempt to find a balance between freeway and ramp operations, though no clear method has been determined as most effective due to different preferences of the local or state departments of transportation (DOT).</p>
+<p>In order to best understand the benefits of ramp meters, it is imperative that their function be established. There are two classifications of ramp meters, which include pre-timed meters and traffic-responsive meters. Pre-timed meters operate at a set rate based on historical data; this type of metering has proven effective when traffic volumes are easily predictable. However, when sudden changes in traffic operations occur, pre-timed meters often fail to account for the change without manual intervention. Traffic-responsive metering relies on real-time data collection through the use of loop detectors, which can be placed within the pavement or in the form of traffic cameras. Due to the extensive amount of data being collected, the initial calibration of traffic-responsive meters can prove to be time consuming; however, once effectively implemented, they can mitigate congestion based on the data received on the ramp (Jacobson et al. 2006).</p>
+<p>By using loop detectors on the ramps, time occupancy and traffic volume data are gathered. Wu et al. use these data to develop an algorithm that estimates the queue length by comparing three methods of calculating the queue length, including a Kalman filter, a conservation model, and the Highway Capacity Manual (HCM) back of queue method (Wu et al. 2009). Through their analysis, they found that the detectors introduced error when compared with reality. Many difficulties are introduced when relying solely on the detector data, in that the speed is difficult to predict from the detectors, vehicles can be double-counted or missed altogether, and they are difficult to replace or repair (Wu et al. 2008). Because of this error, the original Kalman filter equation and conservation model equation were modified to balance the volumes entering and exiting the ramp. Equation 1.1 and Equation 1.2 are the original equations used for the Kalman filter method, Equation 1.3 is the original equation for the conservation model, Equation 1.4 is the modified Kalman filter equation, and Equation 1.5 is the adjusted conservation model equation.</p>
+<p><strong>Qn = Qn-1 + T(Vin – Vout)+K(qn-1 – Qn-1)</strong> (1.1)</p>
+<p>Where:
+- Qn = predicted number of on-ramp queued vehicles in the next time period (veh)
+- Qn-1 = number of on-ramp queued vehicles in the current time period (veh)
+- T = time interval for number of queued vehicles calculation
+- Vin = flow rate entering the on-ramp (veh)
+- Vout = flow rate exiting the on-ramp (veh)
+- K = 0.22 recommended for one detector and 0.5 recommended for all other detector numbers, generally 0 &lt; K &lt; 1
+- qn-1 = number of on-ramp queued vehicles calculated from detector time occupancy data (veh)</p>
+<p>qn-1 = ((L * n)/(l + D))*On-1 (1.2)</p>
+<p>Where:
+- qn-1 = number of on-ramp queued vehicles calculated from detector time occupancy data (veh)
+- L = length of the on-ramp (ft)
+- n = number of lanes
+- l = average physical vehicle length (ft)
+- D = safety distance between vehicles (ft)
+- On-1 = time occupancy collected by loop detectors</p>
+<p>Qn = Qn-1 + Nin – Nout (1.3)</p>
+<p>Where:
+- Qn = predicted number of on-ramp queued vehicles in the next time period (veh)
+- Qn-1 = number of on-ramp queued vehicles in the current time period (veh)
+- Nin = vehicle counts entering the on-ramp during a data collection time interval such as 20 s, which can be from queue loop detectors or entrance reporting loop detectors (veh)
+- Nout = vehicle counts exiting the on-ramp during a data collection time interval such as 20 s, which can be from passage loop detectors (veh)</p>
+<p>Qn = Qn-1 + T(CVin – Vout)+K(qn-1 – Qn-1) (1.4)</p>
+<p>Where:
+- C = adjustment factor to account for miscounting of the detectors
+- All other variables as previously defined in Equation 1.1</p>
+<p>Qn = Qn-1 + CNin – Nout (1.5)</p>
+<p>Where:
+- C = adjustment factor to account for miscounting of the detectors
+- All other variables as previously defined in Equation 1.3</p>
+<p>To account for the miscounting errors, Wu et al. introduced a correction factor “C” into the equation that balances the volume entering and exiting the ramp, as seen in Equation 1.4 and Equation 1.5 (Wu et al. 2009). By using this correction factor, it is presumed the Kalman filter algorithm and conservation model will produce more accurate queue length estimates, which can then be used to calculate the expected vehicle wait time. By applying these methods to the Layton Parkway northbound on-ramp in Davis County, Utah will provide a more accurate idea of the quality of detector data available and will be a crucial step in estimating the wait time of vehicles at this ramp.</p>
+</div>
+<div id="summary" class="section level2">
+<h2><span class="header-section-number">3.2</span> Summary</h2>
+<p>These equations, though effective, fail to directly answer the concern posed by UDOT of finding the expected wait time at the on-ramps, as the focus of these equations is to find the anticipated queue length. Additional applicable equations and algorithms will be added to this literature review as they become available. Further study is currently being conducted for this project to find a correlation between the queue length and wait time, and thus be able to provide an estimate of how long a vehicle can expect to wait at a given on-ramp to I-15 in Utah.</p>
 
+</div>
 </div>
             </section>
 
