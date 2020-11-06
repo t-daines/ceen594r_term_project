@@ -1,3 +1,3 @@
 # Introduction {#intro}
-
+<!-- You should probably work on this introduction. You are describing an analysis project, and not just a literature review. -->
 This literature review was conducted to gain insight and understanding on ramp meter operation and evaluation with a focus on how the ramp metering system’s characteristics affect the expected wait time for vehicles. The review will explain in brief detail how ramp meters function and will then go on to explain how the components of the on-ramp impact the amount of time a vehicle will be required to wait on the ramp prior to entering the freeway. Various components such as the number of lanes, the length of the ramp, the ramp metering rate, and the time of day will be considered. The goal of this project is to produce an algorithm that can accurately predict and calculate the wait time based on the previously mentioned attributes of the ramp.
