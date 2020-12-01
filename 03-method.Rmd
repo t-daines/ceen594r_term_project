@@ -1,3 +1,44 @@
-# Methods
+# Methods to Estimate Ramp Queue Length
 
-We describe our methods in this chapter.
+By using loop detectors on the ramps, time occupancy and traffic volume data are gathered. Occupancy refers to the percent of time a point on the road is occupied by a vehicle; for example, if no vehicle passes over the detector during a given time period, the occupancy would be 0 percent, whereas if a vehicle was detected passing over the detector during half of that same time period, the time occupancy would show 50 percent [@wu2009methodologies]. Wu et al. (2009) use the volume and occupancy data from the detectors by comparing three methods of calculating the queue length, including a Kalman filter, a conservation model, and the Highway Capacity Manual (HCM) back of queue method (the HCM method proved to be ineffective, and will not be discussed in detail in this report). The original equations developed for the conservation model and Kalman filter algorithms required the volume entering and exiting the ramp to be equal, but through analysis, they found that the detectors introduced error when compared with field recorded traffic volumes. 
+
+Many difficulties are introduced when relying solely on the detector data, particularly that vehicles can be double-counted or missed altogether [@wu2008experiment]. Because of this potential for error, the original conservation model equation and Kalman filter equation were modified to balance the volumes entering and exiting the ramp, which is shown by a volume-balancing ratio (C) in each equation. Equation \@ref(eq:conservation) is the conservation model equation with the volume-balancing ratio included, and Equation \@ref(eq:kalman1) and Equation \@ref(eq:kalman2) are the equations used for the Kalman filter method with the volume-balancing ratio.
+
+\begin{equation}
+Q_n = Q_{n-1} + CN_{in} – N_{out}
+  (\#eq:conservation)
+\end{equation}
+
+Where: 
+$Q_n =$ predicted number of on-ramp queued vehicles in the next time period (veh)
+$Q_{n-1} =$ number of on-ramp queued vehicles in the current time period (veh)
+$C =$ adjustment factor to account for miscounting of the detectors
+$N_{in} =$ vehicle counts entering the on-ramp during a data collection time interval such as 20 s, which can be from queue loop detectors or entrance reporting loop detectors (veh)
+$N_{out} =$ vehicle counts exiting the on-ramp during a data collection time interval such as 20 s, which can be from passage loop detectors (veh)
+
+\begin{equation}
+Q_n = Q_{n-1} + T(CV_{in} – V_{out})+K(\hat{Q}_{n-1} – Q_{n-1})
+  (\#eq:kalman1)
+\end{equation}
+
+Where:
+$T =$ time interval for number of queued vehicles calculation
+$V_{in} =$ flow rate entering the on-ramp (veh)
+$V_{out} =$ flow rate exiting the on-ramp (veh)
+$K = 0.22$ recommended for one detector and $0.5$ recommended for all other detector numbers, generally $0 < K < 1$
+$\hat{Q}_{n-1} =$ number of on-ramp queued vehicles calculated from detector time occupancy data (veh)
+
+\begin{equation}
+\hat{Q}_{n-1} = ((L_{R} * N)/(L_{E})*O_{n-1}
+  (\#eq:kalman2)
+\end{equation}
+
+Where:
+$L_R =$ length of the on-ramp (ft)
+$N =$ number of lanes
+$L_E =$ effective vehicle length (vehicle length + safety distance between vehicles), (ft)
+$O_{n-1} =$ time occupancy collected by loop detectors
+
+Using the volume-balancing ratio "$C$" previously mentioned, it is presumed the conservation model and Kalman filter algorithms will produce more accurate queue length estimates. Wu et al. (2009) explain that the volume-balancing ratio may be set as a constant value or may be calculated in real time. Prior to incorporating this volume-balancing ratio, when Wu et al. (2009) utilized Equation \@ref(eq:kalman1) to find the queue length estimate based on the occupancy data, they found the correlation ($R$ value) between the estimated queue length and the time occupancy to be only 0.63. This research also concluded that the relationship between volume data from the detector and the estimated number of vehicles is nonlinear, as the results gave a correlation coefficient of merely 0.18 between the two variables. Therefore, it is likely there are other factors outside the capability of this equation that affect the queue length such as detector error, driver distraction, poor weather, and traffic incidents.
+
+However, in analyzing 20 data sets from ramp meters in Milwaukee, Wisconsin, Wu et al. (2009) found that the volume-balancing ratio improved both the Kalman filter and the conservation models considerably in nearly all cases, and in only a select few cases were slightly more errors introduced. These errors were found to occur in the Kalman filter models because when the volume-balancing ratio is close to 1 (the detector volume entering and exiting the ramp are nearly equal), the Kalman filter coefficient $K$ is also close to zero, but the equation still adds queue length to the estimate from the coefficient $K$, which would introduce additional error. In contrast, when the volume-balancing ratio is not close to 1, the Kalman filter equation yield more reliable results than the conservation model. Overall, both the Kalman filter and conservation model, especially when using the volume-balancing ratio, provide generally accurate estimates of the actual queue length.
