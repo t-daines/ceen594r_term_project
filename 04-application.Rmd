@@ -1,12 +1,7 @@
-# Data Collection and Analysis
+# Applications
 
-## Site Description
-The Layton Parkway northbound on-ramp to I-15 has two lanes entering the on-ramp from the west (two lanes turning left onto the ramp) and one lane entering the ramp from the east (one right turn lane). The left turn lanes are controlled by a left-turn only phase at the traffic signal; there is no permitted phase for this turning movement. The right turn lane is free at the entrance to the ramp, but approximately 150 feet into the ramp, there is a yield sign, as this lane ends and must merge with the lane to its left. The ramp is about 540 feet long from the entrance to the ramp meter signal. The ramp metering rate is adaptive, as the ramp metering algorithm used by UDOT automatically modifies the rate based on detector data. 
+Some _significant_ applications are demonstrated in this chapter.
 
-## Data Collection
-
-Five days of data collection were conducted during the PM metering period of 4:00 - 6:30 PM in August of 2020. The data from UDOT is collected via loop detectors at three locations along the on-ramp: near the on-ramp entrance (referred to as "excessive queue" in this report), in the middle of the ramp ("intermediate queue"), and just past the ramp meter signal ("passage"). These data are given in one-minute periods (e.g. 4:00:00 - 4:01:00 PM) in each lane and they include the vehicle volume, the detector occupancy, the number of lanes, and the ramp metering rate. 
-
-The detector data are compared with manual traffic counts of these five days, which are also recorded in one-minute periods in each lane. The manual counts include the number of vehicles entering each lane at the excessive queue detectors as well as the queue size at the ramp meter signal at the end of each one-minute period. For example, if from 4:00:00 to 4:01:00 PM, 5 vehicles entered the far left lane, 4 vehicles from the middle lane, and 3 vehicles entered from the right lane, each lane's count during that one minute would be recorded, and the total number of vehicles entering the ramp during that minute is 12 vehicles. In addition, at 4:01:00 PM, the total queue size at the signal for all lanes is also recorded; perhaps at 4:01:00 PM, the queue size is 7 vehicles. Assuming there was no queue previous to this period, that therefore means that 5 of the 12 vehicles were able to enter the freeway between 4:00:00 and 4:01:00 PM. During the next time period, if a total of 10 new vehicles entered the ramp and at 4:02:00 PM, the queue size was 9 vehicles, that would mean that 9 vehicles would have entered the freeway during that time: the 7 vehicles from the previous time period, plus an additional 2 vehicles that entered the ramp during this time period. 
+## Example one
 
 ## Example two

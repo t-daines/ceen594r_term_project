@@ -1,5 +1,5 @@
 --- 
-title: "Estimation of Ramp Queue Length"
+title: "Estimation of Ramp Meter Wait Time"
 author: "Tanner Daines"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
@@ -7,12 +7,16 @@ documentclass: book
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
-  description: "This is a report of a data analysis project that focuses on analyzing ramp meters in the state of Utah. The goal of the project is to obtain an accurate estimate of the expected queue length for vehicles on any given on-ramp with ramp metering in the State of Utah."
+description: "This is a report of a data analysis project that focuses on analyzing ramp meters in the state of Utah. The goal of the project is to obtain an accurate estimate of the expected wait time for vehicles on the on-ramp."
 ---
 
 # Abstract
 
-Located on many on-ramps throughout Davis, Salt Lake, and Utah counties, ramp meters are used to regulate the flow of traffic during peak hours. On each ramp, there are detectors beneath the pavement located in three areas, including passage (after the ramp meter signal), intermediate (middle of the on-ramp), and excessive queue detectors (near the on-ramp entrance). These detectors provide data that include volume and occupancy counts, ramp meter rate, and the number of lanes on the ramp. UDOT is continuously collecting these data points to analyze ramp and freeway operations. Using these data, this project will seek to develop a reliable algorithm that can accurately reflect the vehicle queue length on a ramp. The focus of this project will be on the metered northbound on-ramp at Layton Parkway in Davis County, with the aim for the algorithm to then be applied to additional ramps in Utah in the future.
+<<<<<<< HEAD
+Located on many on-ramps throughout Davis, Salt Lake, and Utah counties, **ramp meters** are used to regulate the flow of traffic during peak hours. On each ramp, there are **detectors** beneath the pavement located in three areas, including passage (after the ramp meter signal), intermediate (middle of the on-ramp), and excessive queue detectors (near the on-ramp entrance). These detectors provide data that include volume and **occupancy** counts, **ramp meter rate**, and the number of lanes on the ramp. UDOT is continuously collecting these data points to analyze ramp and freeway operations. Using these data, this project will seek to develop a reliable algorithm that can accurately reflect ramp meter wait time, which will be published to a website by UDOT, where it will be viewable by the public. The focus of this project will be on the metered on-ramp at Layton Parkway in Davis County, with the aim for the algorithm to then be applied to additional ramps in Utah in the future.
+=======
+Located on many on-ramps throughout Davis, Salt Lake, and Utah counties, ramp meters are used to regulate the flow of traffic during peak hours. On each ramp, there are detectors beneath the pavement located in three areas, including passage (after the ramp meter signal), intermediate (middle of the on-ramp), and excessive queue detectors (near the on-ramp entrance). These detectors provide data that include volume and occupancy counts, ramp meter rate, and the number of lanes on the ramp. UDOT is continuously collecting these data points to analyze ramp and freeway operations. Using these data, this project will seek to develop a reliable algorithm that can accurately reflect the vehicle queue length on a ramp. The focus of this project will be on the metered on-ramp at Layton Parkway in Davis County, with the aim for the algorithm to then be applied to additional ramps in Utah in the future.
+>>>>>>> parent of d567ddc... Clarified which direction the ramp goes.
 
 ```{r include=FALSE}
 # automatically create a bib database for R packages
