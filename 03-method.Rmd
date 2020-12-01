@@ -11,10 +11,15 @@ Q_n = Q_{n-1} + CN_{in} – N_{out}
 
 Where: 
 $Q_n =$ predicted number of on-ramp queued vehicles in the next time period (veh)
+
 $Q_{n-1} =$ number of on-ramp queued vehicles in the current time period (veh)
+
 $C =$ adjustment factor to account for miscounting of the detectors
+
 $N_{in} =$ vehicle counts entering the on-ramp during a data collection time interval such as 20 s, which can be from queue loop detectors or entrance reporting loop detectors (veh)
+
 $N_{out} =$ vehicle counts exiting the on-ramp during a data collection time interval such as 20 s, which can be from passage loop detectors (veh)
+
 
 \begin{equation}
 Q_n = Q_{n-1} + T(CV_{in} – V_{out})+K(\hat{Q}_{n-1} – Q_{n-1})
@@ -23,10 +28,15 @@ Q_n = Q_{n-1} + T(CV_{in} – V_{out})+K(\hat{Q}_{n-1} – Q_{n-1})
 
 Where:
 $T =$ time interval for number of queued vehicles calculation
+
 $V_{in} =$ flow rate entering the on-ramp (veh)
+
 $V_{out} =$ flow rate exiting the on-ramp (veh)
+
 $K = 0.22$ recommended for one detector and $0.5$ recommended for all other detector numbers, generally $0 < K < 1$
+
 $\hat{Q}_{n-1} =$ number of on-ramp queued vehicles calculated from detector time occupancy data (veh)
+
 
 \begin{equation}
 \hat{Q}_{n-1} = ((L_{R} * N)/(L_{E})*O_{n-1}
@@ -35,9 +45,13 @@ $\hat{Q}_{n-1} =$ number of on-ramp queued vehicles calculated from detector tim
 
 Where:
 $L_R =$ length of the on-ramp (ft)
+
 $N =$ number of lanes
+
 $L_E =$ effective vehicle length (vehicle length + safety distance between vehicles), (ft)
+
 $O_{n-1} =$ time occupancy collected by loop detectors
+
 
 Using the volume-balancing ratio "$C$" previously mentioned, it is presumed the conservation model and Kalman filter algorithms will produce more accurate queue length estimates. Wu et al. (2009) explain that the volume-balancing ratio may be set as a constant value or may be calculated in real time. Prior to incorporating this volume-balancing ratio, when Wu et al. (2009) utilized Equation \@ref(eq:kalman1) to find the queue length estimate based on the occupancy data, they found the correlation ($R$ value) between the estimated queue length and the time occupancy to be only 0.63. This research also concluded that the relationship between volume data from the detector and the estimated number of vehicles is nonlinear, as the results gave a correlation coefficient of merely 0.18 between the two variables. Therefore, it is likely there are other factors outside the capability of this equation that affect the queue length such as detector error, driver distraction, poor weather, and traffic incidents.
 
