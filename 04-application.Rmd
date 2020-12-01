@@ -13,4 +13,4 @@ The detector data are compared with manual traffic counts of these five days, wh
 
 ## Example two
 
-[Image1]:file:///C:/Users/daine/OneDrive/Desktop/BYU/4%20-%20Senior%20Year/Fall%202020/CE%20EN%20594R/Layton%20Parkway%20Detector%20Locations.pdf
+[Image1]: http://www.gratisography.com/pictures/79.jpg
