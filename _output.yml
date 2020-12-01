@@ -6,4 +6,5 @@ bookdown::gitbook:
         <li><a href="./">Estimation of Ramp Queue Length</a></li>
       after: |
         <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
-    download: ["pdf", "epub"]
+    download: ["pdf"]
+
