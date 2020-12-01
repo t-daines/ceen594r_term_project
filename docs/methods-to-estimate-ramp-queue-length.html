@@ -77,7 +77,7 @@
 <li class="chapter" data-level="5" data-path="data-collection-and-analysis.html"><a href="data-collection-and-analysis.html"><i class="fa fa-check"></i><b>5</b> Data Collection and Analysis</a><ul>
 <li class="chapter" data-level="5.1" data-path="data-collection-and-analysis.html"><a href="data-collection-and-analysis.html#site-description"><i class="fa fa-check"></i><b>5.1</b> Site Description</a></li>
 <li class="chapter" data-level="5.2" data-path="data-collection-and-analysis.html"><a href="data-collection-and-analysis.html#data-collection"><i class="fa fa-check"></i><b>5.2</b> Data Collection</a></li>
-<li class="chapter" data-level="5.3" data-path="data-collection-and-analysis.html"><a href="data-collection-and-analysis.html#example-two"><i class="fa fa-check"></i><b>5.3</b> Example two</a></li>
+<li class="chapter" data-level="5.3" data-path="data-collection-and-analysis.html"><a href="data-collection-and-analysis.html#data-analysis"><i class="fa fa-check"></i><b>5.3</b> Data Analysis</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>6</b> Summary</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -109,31 +109,31 @@
 Q_n = Q_{n-1} + CN_{in} – N_{out}
   \tag{4.1}
 \end{equation}\]</span></p>
-<p>Where:
-<span class="math inline">\(Q_n =\)</span> predicted number of on-ramp queued vehicles in the next time period (veh)
-<span class="math inline">\(Q_{n-1} =\)</span> number of on-ramp queued vehicles in the current time period (veh)
-<span class="math inline">\(C =\)</span> adjustment factor to account for miscounting of the detectors
-<span class="math inline">\(N_{in} =\)</span> vehicle counts entering the on-ramp during a data collection time interval such as 20 s, which can be from queue loop detectors or entrance reporting loop detectors (veh)
-<span class="math inline">\(N_{out} =\)</span> vehicle counts exiting the on-ramp during a data collection time interval such as 20 s, which can be from passage loop detectors (veh)</p>
+<p>Where:</p>
+<p><span class="math inline">\(Q_n =\)</span> predicted number of on-ramp queued vehicles in the next time period (veh)</p>
+<p><span class="math inline">\(Q_{n-1} =\)</span> number of on-ramp queued vehicles in the current time period (veh)</p>
+<p><span class="math inline">\(C =\)</span> adjustment factor to account for miscounting of the detectors</p>
+<p><span class="math inline">\(N_{in} =\)</span> vehicle counts entering the on-ramp during a data collection time interval such as 20 s, which can be from queue loop detectors or entrance reporting loop detectors (veh)</p>
+<p><span class="math inline">\(N_{out} =\)</span> vehicle counts exiting the on-ramp during a data collection time interval such as 20 s, which can be from passage loop detectors (veh)</p>
 <p><span class="math display" id="eq:kalman1">\[\begin{equation}
 Q_n = Q_{n-1} + T(CV_{in} – V_{out})+K(\hat{Q}_{n-1} – Q_{n-1})
   \tag{4.2}
 \end{equation}\]</span></p>
-<p>Where:
-<span class="math inline">\(T =\)</span> time interval for number of queued vehicles calculation
-<span class="math inline">\(V_{in} =\)</span> flow rate entering the on-ramp (veh)
-<span class="math inline">\(V_{out} =\)</span> flow rate exiting the on-ramp (veh)
-<span class="math inline">\(K = 0.22\)</span> recommended for one detector and <span class="math inline">\(0.5\)</span> recommended for all other detector numbers, generally <span class="math inline">\(0 &lt; K &lt; 1\)</span>
-<span class="math inline">\(\hat{Q}_{n-1} =\)</span> number of on-ramp queued vehicles calculated from detector time occupancy data (veh)</p>
+<p>Where:</p>
+<p><span class="math inline">\(T =\)</span> time interval for number of queued vehicles calculation</p>
+<p><span class="math inline">\(V_{in} =\)</span> flow rate entering the on-ramp (veh)</p>
+<p><span class="math inline">\(V_{out} =\)</span> flow rate exiting the on-ramp (veh)</p>
+<p><span class="math inline">\(K = 0.22\)</span> recommended for one detector and <span class="math inline">\(0.5\)</span> recommended for all other detector numbers, generally <span class="math inline">\(0 &lt; K &lt; 1\)</span></p>
+<p><span class="math inline">\(\hat{Q}_{n-1} =\)</span> number of on-ramp queued vehicles calculated from detector time occupancy data (veh)</p>
 <p><span class="math display" id="eq:kalman2">\[\begin{equation}
 \hat{Q}_{n-1} = ((L_{R} * N)/(L_{E})*O_{n-1}
   \tag{4.3}
 \end{equation}\]</span></p>
-<p>Where:
-<span class="math inline">\(L_R =\)</span> length of the on-ramp (ft)
-<span class="math inline">\(N =\)</span> number of lanes
-<span class="math inline">\(L_E =\)</span> effective vehicle length (vehicle length + safety distance between vehicles), (ft)
-<span class="math inline">\(O_{n-1} =\)</span> time occupancy collected by loop detectors</p>
+<p>Where:</p>
+<p><span class="math inline">\(L_R =\)</span> length of the on-ramp (ft)</p>
+<p><span class="math inline">\(N =\)</span> number of lanes</p>
+<p><span class="math inline">\(L_E =\)</span> effective vehicle length (vehicle length + safety distance between vehicles), (ft)</p>
+<p><span class="math inline">\(O_{n-1} =\)</span> time occupancy collected by loop detectors</p>
 <p>Using the volume-balancing ratio “<span class="math inline">\(C\)</span>” previously mentioned, it is presumed the conservation model and Kalman filter algorithms will produce more accurate queue length estimates. Wu et al. (2009) explain that the volume-balancing ratio may be set as a constant value or may be calculated in real time. Prior to incorporating this volume-balancing ratio, when Wu et al. (2009) utilized Equation <a href="methods-to-estimate-ramp-queue-length.html#eq:kalman1">(4.2)</a> to find the queue length estimate based on the occupancy data, they found the correlation (<span class="math inline">\(R\)</span> value) between the estimated queue length and the time occupancy to be only 0.63. This research also concluded that the relationship between volume data from the detector and the estimated number of vehicles is nonlinear, as the results gave a correlation coefficient of merely 0.18 between the two variables. Therefore, it is likely there are other factors outside the capability of this equation that affect the queue length such as detector error, driver distraction, poor weather, and traffic incidents.</p>
 <p>However, in analyzing 20 data sets from ramp meters in Milwaukee, Wisconsin, Wu et al. (2009) found that the volume-balancing ratio improved both the Kalman filter and the conservation models considerably in nearly all cases, and in only a select few cases were slightly more errors introduced. These errors were found to occur in the Kalman filter models because when the volume-balancing ratio is close to 1 (the detector volume entering and exiting the ramp are nearly equal), the Kalman filter coefficient <span class="math inline">\(K\)</span> is also close to zero, but the equation still adds queue length to the estimate from the coefficient <span class="math inline">\(K\)</span>, which would introduce additional error. In contrast, when the volume-balancing ratio is not close to 1, the Kalman filter equation yield more reliable results than the conservation model. Overall, both the Kalman filter and conservation model, especially when using the volume-balancing ratio, provide generally accurate estimates of the actual queue length.</p>
 
