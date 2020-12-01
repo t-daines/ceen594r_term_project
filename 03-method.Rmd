@@ -10,6 +10,7 @@ Q_n = Q_{n-1} + CN_{in} – N_{out}
 \end{equation}
 
 Where: 
+
 $Q_n =$ predicted number of on-ramp queued vehicles in the next time period (veh)
 
 $Q_{n-1} =$ number of on-ramp queued vehicles in the current time period (veh)
@@ -27,6 +28,7 @@ Q_n = Q_{n-1} + T(CV_{in} – V_{out})+K(\hat{Q}_{n-1} – Q_{n-1})
 \end{equation}
 
 Where:
+
 $T =$ time interval for number of queued vehicles calculation
 
 $V_{in} =$ flow rate entering the on-ramp (veh)
@@ -44,6 +46,7 @@ $\hat{Q}_{n-1} =$ number of on-ramp queued vehicles calculated from detector tim
 \end{equation}
 
 Where:
+
 $L_R =$ length of the on-ramp (ft)
 
 $N =$ number of lanes
