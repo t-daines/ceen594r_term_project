@@ -24,7 +24,7 @@
 <meta name="author" content="Tanner Daines" />
 
 
-<meta name="date" content="2020-11-02" />
+<meta name="date" content="2020-11-30" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="index.html"/>
-<link rel="next" href="literature.html"/>
+<link rel="next" href="ramp-metering-design-and-implementation.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -72,16 +72,14 @@
 <li class="divider"></li>
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Abstract</a></li>
 <li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
-<li class="chapter" data-level="3" data-path="literature.html"><a href="literature.html"><i class="fa fa-check"></i><b>3</b> Literature</a><ul>
-<li class="chapter" data-level="3.1" data-path="literature.html"><a href="literature.html#ramp-metering-design-and-implementation"><i class="fa fa-check"></i><b>3.1</b> Ramp Metering Design and Implementation</a></li>
-<li class="chapter" data-level="3.2" data-path="literature.html"><a href="literature.html#summary"><i class="fa fa-check"></i><b>3.2</b> Summary</a></li>
+<li class="chapter" data-level="3" data-path="ramp-metering-design-and-implementation.html"><a href="ramp-metering-design-and-implementation.html"><i class="fa fa-check"></i><b>3</b> Ramp Metering Design and Implementation</a></li>
+<li class="chapter" data-level="4" data-path="methods-to-estimate-ramp-queue-length.html"><a href="methods-to-estimate-ramp-queue-length.html"><i class="fa fa-check"></i><b>4</b> Methods to Estimate Ramp Queue Length</a></li>
+<li class="chapter" data-level="5" data-path="data-collection-and-analysis.html"><a href="data-collection-and-analysis.html"><i class="fa fa-check"></i><b>5</b> Data Collection and Analysis</a><ul>
+<li class="chapter" data-level="5.1" data-path="data-collection-and-analysis.html"><a href="data-collection-and-analysis.html#site-description"><i class="fa fa-check"></i><b>5.1</b> Site Description</a></li>
+<li class="chapter" data-level="5.2" data-path="data-collection-and-analysis.html"><a href="data-collection-and-analysis.html#data-collection"><i class="fa fa-check"></i><b>5.2</b> Data Collection</a></li>
+<li class="chapter" data-level="5.3" data-path="data-collection-and-analysis.html"><a href="data-collection-and-analysis.html#example-two"><i class="fa fa-check"></i><b>5.3</b> Example two</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="methods.html"><a href="methods.html"><i class="fa fa-check"></i><b>4</b> Methods</a></li>
-<li class="chapter" data-level="5" data-path="applications.html"><a href="applications.html"><i class="fa fa-check"></i><b>5</b> Applications</a><ul>
-<li class="chapter" data-level="5.1" data-path="applications.html"><a href="applications.html#example-one"><i class="fa fa-check"></i><b>5.1</b> Example one</a></li>
-<li class="chapter" data-level="5.2" data-path="applications.html"><a href="applications.html#example-two"><i class="fa fa-check"></i><b>5.2</b> Example two</a></li>
-</ul></li>
-<li class="chapter" data-level="6" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>6</b> Final Words</a></li>
+<li class="chapter" data-level="6" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>6</b> Summary</a></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -105,7 +103,9 @@
             <section class="normal" id="section-">
 <div id="intro" class="section level1">
 <h1><span class="header-section-number">Chapter 2</span> Introduction</h1>
-<p>This literature review was conducted to gain insight and understanding on ramp meter operation and evaluation with a focus on how the ramp metering system’s characteristics affect the expected wait time for vehicles. The review will explain in brief detail how ramp meters function and will then go on to explain how the components of the on-ramp impact the amount of time a vehicle will be required to wait on the ramp prior to entering the freeway. Various components such as the number of lanes, the length of the ramp, the ramp metering rate, and the time of day will be considered. The goal of this project is to produce an algorithm that can accurately predict and calculate the wait time based on the previously mentioned attributes of the ramp.</p>
+<p>As traffic on freeways continues to rise, developing a reliable method to regulate the flow of vehicles onto the freeway has become increasingly important. A primary method that was first implemented in the 1960s is the ramp meter. A ramp meter is a traffic signal that is placed on the freeway on-ramp, designed to control the rate at which vehicles enter the freeway and therefore prevent it from exceeding capacity. Although ramp meters may improve freeway traffic conditions, they often generate a queue, causing vehicles to wait on the ramp prior to entering the freeway.</p>
+<p>The Utah Department of Transportation (UDOT) has become concerned with this issue throughout the state. UDOT aims to have a method that accurately reports the expected queue length and wait time on any given on-ramp (that utilizes ramp metering) along I-15. This project will focus on estimating the queue length (# of vehicles) on one on-ramp; the ramp chosen for analysis is the northbound on-ramp to I-15 at Layton Parkway in Davis County, Utah.</p>
+<p>First, this report explains in brief detail the basic design and implementation of ramp meters in the form of a literature review. Next, the literature review will continue as the methods used for data analysis will be introduced. The data collection performed on the Layton Parkway on-ramp will then be discussed. Following that will be the interpretation and analysis of the data. Finally, the report will conclude with a summary of all items discussed.</p>
 
 </div>
             </section>
@@ -114,7 +114,7 @@
         </div>
       </div>
 <a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="literature.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="ramp-metering-design-and-implementation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

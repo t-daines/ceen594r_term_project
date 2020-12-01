@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Methods to Estimate Ramp Queue Length | Estimation of Ramp Meter Wait Time</title>
+  <meta name="description" content="This is a report of a data analysis project that focuses on analyzing ramp meters in the state of Utah. The goal of the project is to obtain an accurate estimate of the expected wait time for vehicles on the on-ramp." />
+  <meta name="generator" content="bookdown 0.20.6 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Methods to Estimate Ramp Queue Length | Estimation of Ramp Meter Wait Time" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a report of a data analysis project that focuses on analyzing ramp meters in the state of Utah. The goal of the project is to obtain an accurate estimate of the expected wait time for vehicles on the on-ramp." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Methods to Estimate Ramp Queue Length | Estimation of Ramp Meter Wait Time" />
+  
+  <meta name="twitter:description" content="This is a report of a data analysis project that focuses on analyzing ramp meters in the state of Utah. The goal of the project is to obtain an accurate estimate of the expected wait time for vehicles on the on-ramp." />
+  
+
+<meta name="author" content="Tanner Daines" />
+
+
+<meta name="date" content="2020-11-30" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="ramp-metering-design-and-implementation.html"/>
+<link rel="next" href="data-collection-and-analysis.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Abstract</a></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
+<li class="chapter" data-level="3" data-path="ramp-metering-design-and-implementation.html"><a href="ramp-metering-design-and-implementation.html"><i class="fa fa-check"></i><b>3</b> Ramp Metering Design and Implementation</a></li>
+<li class="chapter" data-level="4" data-path="methods-to-estimate-ramp-queue-length.html"><a href="methods-to-estimate-ramp-queue-length.html"><i class="fa fa-check"></i><b>4</b> Methods to Estimate Ramp Queue Length</a></li>
+<li class="chapter" data-level="5" data-path="data-collection-and-analysis.html"><a href="data-collection-and-analysis.html"><i class="fa fa-check"></i><b>5</b> Data Collection and Analysis</a><ul>
+<li class="chapter" data-level="5.1" data-path="data-collection-and-analysis.html"><a href="data-collection-and-analysis.html#site-description"><i class="fa fa-check"></i><b>5.1</b> Site Description</a></li>
+<li class="chapter" data-level="5.2" data-path="data-collection-and-analysis.html"><a href="data-collection-and-analysis.html#data-collection"><i class="fa fa-check"></i><b>5.2</b> Data Collection</a></li>
+<li class="chapter" data-level="5.3" data-path="data-collection-and-analysis.html"><a href="data-collection-and-analysis.html#example-two"><i class="fa fa-check"></i><b>5.3</b> Example two</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>6</b> Summary</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Estimation of Ramp Meter Wait Time</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="methods-to-estimate-ramp-queue-length" class="section level1">
+<h1><span class="header-section-number">Chapter 4</span> Methods to Estimate Ramp Queue Length</h1>
+<p>By using loop detectors on the ramps, time occupancy and traffic volume data are gathered. Occupancy refers to the percent of time a point on the road is occupied by a vehicle; for example, if no vehicle passes over the detector during a given time period, the occupancy would be 0 percent, whereas if a vehicle was detected passing over the detector during half of that same time period, the time occupancy would show 50 percent <span class="citation">(<span class="citeproc-not-found" data-reference-id="wu2009methodologies"><strong>???</strong></span>)</span>. Wu et al. (2009) use the volume and occupancy data from the detectors by comparing three methods of calculating the queue length, including a Kalman filter, a conservation model, and the Highway Capacity Manual (HCM) back of queue method (the HCM method proved to be ineffective, and will not be discussed in detail in this report). The original equations developed for the conservation model and Kalman filter algorithms required the volume entering and exiting the ramp to be equal, but through analysis, they found that the detectors introduced error when compared with field recorded traffic volumes.</p>
+<p>Many difficulties are introduced when relying solely on the detector data, particularly that vehicles can be double-counted or missed altogether <span class="citation">(<span class="citeproc-not-found" data-reference-id="wu2008experiment"><strong>???</strong></span>)</span>. Because of this potential for error, the original conservation model equation and Kalman filter equation were modified to balance the volumes entering and exiting the ramp, which is shown by a volume-balancing ratio (C) in each equation. Equation <a href="methods-to-estimate-ramp-queue-length.html#eq:conservation">(4.1)</a> is the conservation model equation with the volume-balancing ratio included, and Equation <a href="methods-to-estimate-ramp-queue-length.html#eq:kalman1">(4.2)</a> and Equation <a href="methods-to-estimate-ramp-queue-length.html#eq:kalman2">(4.3)</a> are the equations used for the Kalman filter method with the volume-balancing ratio.</p>
+<p><span class="math display" id="eq:conservation">\[\begin{equation}
+Q_n = Q_{n-1} + CN_{in} – N_{out}
+  \tag{4.1}
+\end{equation}\]</span></p>
+<p>Where:
+<span class="math inline">\(Q_n =\)</span> predicted number of on-ramp queued vehicles in the next time period (veh)
+<span class="math inline">\(Q_{n-1} =\)</span> number of on-ramp queued vehicles in the current time period (veh)
+<span class="math inline">\(C =\)</span> adjustment factor to account for miscounting of the detectors
+<span class="math inline">\(N_{in} =\)</span> vehicle counts entering the on-ramp during a data collection time interval such as 20 s, which can be from queue loop detectors or entrance reporting loop detectors (veh)
+<span class="math inline">\(N_{out} =\)</span> vehicle counts exiting the on-ramp during a data collection time interval such as 20 s, which can be from passage loop detectors (veh)</p>
+<p><span class="math display" id="eq:kalman1">\[\begin{equation}
+Q_n = Q_{n-1} + T(CV_{in} – V_{out})+K(\hat{Q}_{n-1} – Q_{n-1})
+  \tag{4.2}
+\end{equation}\]</span></p>
+<p>Where:
+<span class="math inline">\(T =\)</span> time interval for number of queued vehicles calculation
+<span class="math inline">\(V_{in} =\)</span> flow rate entering the on-ramp (veh)
+<span class="math inline">\(V_{out} =\)</span> flow rate exiting the on-ramp (veh)
+<span class="math inline">\(K = 0.22\)</span> recommended for one detector and <span class="math inline">\(0.5\)</span> recommended for all other detector numbers, generally <span class="math inline">\(0 &lt; K &lt; 1\)</span>
+<span class="math inline">\(\hat{Q}_{n-1} =\)</span> number of on-ramp queued vehicles calculated from detector time occupancy data (veh)</p>
+<p><span class="math display" id="eq:kalman2">\[\begin{equation}
+\hat{Q}_{n-1} = ((L_{R} * N)/(L_{E})*O_{n-1}
+  \tag{4.3}
+\end{equation}\]</span></p>
+<p>Where:
+<span class="math inline">\(L_R =\)</span> length of the on-ramp (ft)
+<span class="math inline">\(N =\)</span> number of lanes
+<span class="math inline">\(L_E =\)</span> effective vehicle length (vehicle length + safety distance between vehicles), (ft)
+<span class="math inline">\(O_{n-1} =\)</span> time occupancy collected by loop detectors</p>
+<p>Using the volume-balancing ratio “<span class="math inline">\(C\)</span>” previously mentioned, it is presumed the conservation model and Kalman filter algorithms will produce more accurate queue length estimates. Wu et al. (2009) explain that the volume-balancing ratio may be set as a constant value or may be calculated in real time. Prior to incorporating this volume-balancing ratio, when Wu et al. (2009) utilized Equation <a href="methods-to-estimate-ramp-queue-length.html#eq:kalman1">(4.2)</a> to find the queue length estimate based on the occupancy data, they found the correlation (<span class="math inline">\(R\)</span> value) between the estimated queue length and the time occupancy to be only 0.63. This research also concluded that the relationship between volume data from the detector and the estimated number of vehicles is nonlinear, as the results gave a correlation coefficient of merely 0.18 between the two variables. Therefore, it is likely there are other factors outside the capability of this equation that affect the queue length such as detector error, driver distraction, poor weather, and traffic incidents.</p>
+<p>However, in analyzing 20 data sets from ramp meters in Milwaukee, Wisconsin, Wu et al. (2009) found that the volume-balancing ratio improved both the Kalman filter and the conservation models considerably in nearly all cases, and in only a select few cases were slightly more errors introduced. These errors were found to occur in the Kalman filter models because when the volume-balancing ratio is close to 1 (the detector volume entering and exiting the ramp are nearly equal), the Kalman filter coefficient <span class="math inline">\(K\)</span> is also close to zero, but the equation still adds queue length to the estimate from the coefficient <span class="math inline">\(K\)</span>, which would introduce additional error. In contrast, when the volume-balancing ratio is not close to 1, the Kalman filter equation yield more reliable results than the conservation model. Overall, both the Kalman filter and conservation model, especially when using the volume-balancing ratio, provide generally accurate estimates of the actual queue length.</p>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="ramp-metering-design-and-implementation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-collection-and-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["ceen594r_term_project.pdf", "ceen594r_term_project.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

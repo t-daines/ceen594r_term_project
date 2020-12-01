@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Estimation of Ramp Meter Wait Time</title>
+  <title>Chapter 3 Ramp Metering Design and Implementation | Estimation of Ramp Meter Wait Time</title>
   <meta name="description" content="This is a report of a data analysis project that focuses on analyzing ramp meters in the state of Utah. The goal of the project is to obtain an accurate estimate of the expected wait time for vehicles on the on-ramp." />
   <meta name="generator" content="bookdown 0.20.6 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Estimation of Ramp Meter Wait Time" />
+  <meta property="og:title" content="Chapter 3 Ramp Metering Design and Implementation | Estimation of Ramp Meter Wait Time" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Estimation of Ramp Meter Wait Time" />
+  <meta name="twitter:title" content="Chapter 3 Ramp Metering Design and Implementation | Estimation of Ramp Meter Wait Time" />
   
   <meta name="twitter:description" content="This is a report of a data analysis project that focuses on analyzing ramp meters in the state of Utah. The goal of the project is to obtain an accurate estimate of the expected wait time for vehicles on the on-ramp." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="intro.html"/>
+<link rel="prev" href="intro.html"/>
+<link rel="next" href="methods-to-estimate-ramp-queue-length.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -101,18 +101,10 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Estimation of Ramp Meter Wait Time</h1>
-<p class="author"><em>Tanner Daines</em></p>
-<p class="date"><em>2020-11-30</em></p>
-</div>
-<div id="abstract" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> Abstract</h1>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-Located on many on-ramps throughout Davis, Salt Lake, and Utah counties, <strong>ramp meters</strong> are used to regulate the flow of traffic during peak hours. On each ramp, there are <strong>detectors</strong> beneath the pavement located in three areas, including passage (after the ramp meter signal), intermediate (middle of the on-ramp), and excessive queue detectors (near the on-ramp entrance). These detectors provide data that include volume and <strong>occupancy</strong> counts, <strong>ramp meter rate</strong>, and the number of lanes on the ramp. UDOT is continuously collecting these data points to analyze ramp and freeway operations. Using these data, this project will seek to develop a reliable algorithm that can accurately reflect ramp meter wait time, which will be published to a website by UDOT, where it will be viewable by the public. The focus of this project will be on the metered on-ramp at Layton Parkway in Davis County, with the aim for the algorithm to then be applied to additional ramps in Utah in the future.
-=======
-Located on many on-ramps throughout Davis, Salt Lake, and Utah counties, ramp meters are used to regulate the flow of traffic during peak hours. On each ramp, there are detectors beneath the pavement located in three areas, including passage (after the ramp meter signal), intermediate (middle of the on-ramp), and excessive queue detectors (near the on-ramp entrance). These detectors provide data that include volume and occupancy counts, ramp meter rate, and the number of lanes on the ramp. UDOT is continuously collecting these data points to analyze ramp and freeway operations. Using these data, this project will seek to develop a reliable algorithm that can accurately reflect the vehicle queue length on a ramp. The focus of this project will be on the metered on-ramp at Layton Parkway in Davis County, with the aim for the algorithm to then be applied to additional ramps in Utah in the future.
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; parent of d567ddc… Clarified which direction the ramp goes.</p>
+<div id="ramp-metering-design-and-implementation" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> Ramp Metering Design and Implementation</h1>
+<p>When freeway operations consistently deteriorate during peak hours, ramp meters are often implemented on the on-ramp, thus regulating the flow of vehicles entering the freeway. By controlling the flow of vehicles onto the freeway, motorists can travel in more favorable traffic conditions, which can reduce crashes, improve overall travel time, and lower emissions <span class="citation">(<span class="citeproc-not-found" data-reference-id="papageorgiou2002freeway"><strong>???</strong></span>)</span>. Although conditions on the freeway may improve when ramp meters are implemented, this often leads to increased wait time on the on-ramp. Several ramp metering algorithms have been used in an attempt to find a balance between freeway and ramp operations, though much remains to be accomplished; many citizens contend that ramp meters cause more delay than they aim to prevent <span class="citation">(<span class="citeproc-not-found" data-reference-id="liu2007improving"><strong>???</strong></span>)</span>. For example, Minnesota implemented ramp meters in 1969, and in the fall of 2000—at the request of citizens in the Minneapolis-St. Paul area—the meters were shut off for eight weeks to analyze whether freeway conditions were superior with the ramp meters <span class="citation">(<span class="citeproc-not-found" data-reference-id="levinson2004evaluating"><strong>???</strong></span>)</span>. To the surprise of some traffic analysts, some areas of the Twin Cities showed decreased travel time without the ramp meters, though the results mostly showed that travel delay, average speed, and travel time performed significantly better with the ramp meters in use. Other areas throughout both the United States and the world have shown similar results. In San Diego, a recently implemented ramp metering algorithm reduced travel time by more than four percent <span class="citation">(<span class="citeproc-not-found" data-reference-id="belisle2019evaluating"><strong>???</strong></span>)</span>. The Seattle Bottleneck algorithm, used in many locations, has also reduced crash rates and average travel time <span class="citation">(<span class="citeproc-not-found" data-reference-id="jacobson2006ramp"><strong>???</strong></span>)</span>. Thus, in order to best understand the benefits of ramp meters, it is imperative that their function be established.</p>
+<p>There are two primary classifications of ramp meters: pre-timed meters and traffic-responsive meters <span class="citation">(<span class="citeproc-not-found" data-reference-id="jacobson2006ramp"><strong>???</strong></span>)</span>. Pre-timed meters operate at a set rate based on historical data; this type of metering has proven effective when traffic volumes are easily predictable. However, when sudden changes in traffic operations occur, pre-timed meters often fail to account for the change without manual intervention. Traffic-responsive metering on the other hand relies on real-time data collection through the use of loop detectors, which can be placed within the pavement or in the form of traffic cameras. Due to the extensive amount of data being collected, the initial calibration of traffic-responsive meters can prove to be time consuming; however, once effectively implemented, they can mitigate congestion based on the data received on the ramp.</p>
 
 </div>
             </section>
@@ -120,8 +112,8 @@ Located on many on-ramps throughout Davis, Salt Lake, and Utah counties, ramp me
           </div>
         </div>
       </div>
-
-<a href="intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="methods-to-estimate-ramp-queue-length.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

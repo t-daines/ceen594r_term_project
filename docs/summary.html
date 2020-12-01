@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Estimation of Ramp Meter Wait Time</title>
+  <title>Chapter 6 Summary | Estimation of Ramp Meter Wait Time</title>
   <meta name="description" content="This is a report of a data analysis project that focuses on analyzing ramp meters in the state of Utah. The goal of the project is to obtain an accurate estimate of the expected wait time for vehicles on the on-ramp." />
   <meta name="generator" content="bookdown 0.20.6 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Estimation of Ramp Meter Wait Time" />
+  <meta property="og:title" content="Chapter 6 Summary | Estimation of Ramp Meter Wait Time" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Estimation of Ramp Meter Wait Time" />
+  <meta name="twitter:title" content="Chapter 6 Summary | Estimation of Ramp Meter Wait Time" />
   
   <meta name="twitter:description" content="This is a report of a data analysis project that focuses on analyzing ramp meters in the state of Utah. The goal of the project is to obtain an accurate estimate of the expected wait time for vehicles on the on-ramp." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
-<link rel="next" href="intro.html"/>
+<link rel="prev" href="data-collection-and-analysis.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -101,18 +101,9 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Estimation of Ramp Meter Wait Time</h1>
-<p class="author"><em>Tanner Daines</em></p>
-<p class="date"><em>2020-11-30</em></p>
-</div>
-<div id="abstract" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> Abstract</h1>
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-Located on many on-ramps throughout Davis, Salt Lake, and Utah counties, <strong>ramp meters</strong> are used to regulate the flow of traffic during peak hours. On each ramp, there are <strong>detectors</strong> beneath the pavement located in three areas, including passage (after the ramp meter signal), intermediate (middle of the on-ramp), and excessive queue detectors (near the on-ramp entrance). These detectors provide data that include volume and <strong>occupancy</strong> counts, <strong>ramp meter rate</strong>, and the number of lanes on the ramp. UDOT is continuously collecting these data points to analyze ramp and freeway operations. Using these data, this project will seek to develop a reliable algorithm that can accurately reflect ramp meter wait time, which will be published to a website by UDOT, where it will be viewable by the public. The focus of this project will be on the metered on-ramp at Layton Parkway in Davis County, with the aim for the algorithm to then be applied to additional ramps in Utah in the future.
-=======
-Located on many on-ramps throughout Davis, Salt Lake, and Utah counties, ramp meters are used to regulate the flow of traffic during peak hours. On each ramp, there are detectors beneath the pavement located in three areas, including passage (after the ramp meter signal), intermediate (middle of the on-ramp), and excessive queue detectors (near the on-ramp entrance). These detectors provide data that include volume and occupancy counts, ramp meter rate, and the number of lanes on the ramp. UDOT is continuously collecting these data points to analyze ramp and freeway operations. Using these data, this project will seek to develop a reliable algorithm that can accurately reflect the vehicle queue length on a ramp. The focus of this project will be on the metered on-ramp at Layton Parkway in Davis County, with the aim for the algorithm to then be applied to additional ramps in Utah in the future.
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; parent of d567ddc… Clarified which direction the ramp goes.</p>
+<div id="summary" class="section level1">
+<h1><span class="header-section-number">Chapter 6</span> Summary</h1>
+<p>The expected wait time at an on-ramp is directly related to the queue length that occurs due to the ramp meter signal. There are few algorithms currently developed to estimate the wait time at freeway entrance ramps solely from detector data, and more research remains to be done. Most of the algorithms currently available require extensive calibration by performing manual traffic counts, which is expensive and time consuming. However, the Kalman filter and conservation model equations have proven to show reliable estimates of the actual wait time, when compared with manual counts. These equations will provide a more accurate estimate of the quality of detector data available and will be a crucial step in estimating the wait time of vehicles at this ramp. Further study is currently being conducted for this project to find a correlation between the queue length and wait time, and by finding this correlation, the expected wait time at on-ramps will be more precisely predicted.</p>
 
 </div>
             </section>
@@ -120,8 +111,8 @@ Located on many on-ramps throughout Davis, Salt Lake, and Utah counties, ramp me
           </div>
         </div>
       </div>
-
-<a href="intro.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="data-collection-and-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

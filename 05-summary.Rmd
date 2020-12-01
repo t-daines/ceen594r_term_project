@@ -1,3 +1,3 @@
-# Final Words
+# Summary
 
-We have finished a nice book.
+The expected wait time at an on-ramp is directly related to the queue length that occurs due to the ramp meter signal. There are few algorithms currently developed to estimate the wait time at freeway entrance ramps solely from detector data, and more research remains to be done. Most of the algorithms currently available require extensive calibration by performing manual traffic counts, which is expensive and time consuming. However, the Kalman filter and conservation model equations have proven to show reliable estimates of the actual wait time, when compared with manual counts. These equations will provide a more accurate estimate of the quality of detector data available and will be a crucial step in estimating the wait time of vehicles at this ramp. Further study is currently being conducted for this project to find a correlation between the queue length and wait time, and by finding this correlation, the expected wait time at on-ramps will be more precisely predicted.
