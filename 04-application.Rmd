@@ -13,5 +13,111 @@ The detector data are compared with manual traffic counts of these five days, wh
 
 The data collected from the five days was first analyzed to determine whether the detectors were accurate.The data for August 17, 2020 is shown below in Table \ref{tab:08-17-2020-table}.
 
+```{r layton_08_17_20}
+library(tidyverse)
+library(readxl)
+
+layton_08_17_2020 <- read_excel("data/layton_08_17_2020.xlsx")
+
+layton_08_17_2020 %>% transmute(`Start time`, Auto_EQ_1, lag_manual = lag(Manual_EQ_1)) %>%
+ gather(key = "counter", value = "count", -`Start time`)  %>%
+ggplot(aes(x = `Start time`, y = count, color = counter)) + 
+  geom_line()
+
+
+sqrt(mean((data$Auto_EQ_1 - data$Manual_EQ_1)^2, na.rm = TRUE))
+
+layton_08_17_2020 %>%
+  summarise(
+    rmse = sqrt(mean((Auto_EQ_1 - Manual_EQ_1)^2, na.rm = TRUE)),
+    rmse_lead1 = sqrt(mean((Auto_EQ_1 - lead(Manual_EQ_1))^2, na.rm = TRUE)),
+    rmse_lag1 = sqrt(mean((Auto_EQ_1 - lag(Manual_EQ_1))^2, na.rm = TRUE))
+  )
+
+# I fixed the function!
+rmse_lag <- function(auto, manual, nlags){
+  n <- 0
+  manual_lag <- manual
+  if(nlags > 0){
+    while(n < nlags){
+      manual_lag <- lag(manual_lag) 
+      n <- n + 1
+    }
+  } else if(nlags < 0){
+    #if nlags is negative, use lead
+    while(n < -1 * nlags){
+      manual_lag <- lead(manual_lag) 
+      n <- n + 1
+    }
+  }
+  
+  sqrt(mean((auto - manual_lag)^2, na.rm = TRUE))
+}
+
+layton_08_17_2020 %>%
+  summarise(
+   lead3  = rmse_lag(Auto_EQ_1, Manual_EQ_1, -3),
+   lead2 = rmse_lag(Auto_EQ_1, Manual_EQ_1, -2),
+   lead1 = rmse_lag(Auto_EQ_1, Manual_EQ_1, -1),
+   none  = rmse_lag(Auto_EQ_1, Manual_EQ_1, 0),
+   lag1  = rmse_lag(Auto_EQ_1, Manual_EQ_1, 1),
+   lag2  = rmse_lag(Auto_EQ_1, Manual_EQ_1, 2),
+   lag3  = rmse_lag(Auto_EQ_1, Manual_EQ_1, 3)
+  )
+```
+
+library(tidyverse)
+library(readxl)
+library(dplyr)
+
+data <- read_excel("data/layton_08_17_2020.xlsx")
+
+data %>% transmute(`Start time`, Auto_EQ_1, lag_manual = lag(Manual_EQ_1)) %>%
+ gather(key = "counter", value = "count", -`Start time`)  %>%
+ggplot(aes(x = `Start time`, y = count, color = counter)) + 
+  geom_line()
+
+
+sqrt(mean((data$Auto_EQ_1 - data$Manual_EQ_1)^2, na.rm = TRUE))
+
+data %>%
+  summarise(
+    rmse = sqrt(mean((Auto_EQ_1 - Manual_EQ_1)^2, na.rm = TRUE)),
+    rmse_lead1 = sqrt(mean((Auto_EQ_1 - lead(Manual_EQ_1))^2, na.rm = TRUE)),
+    rmse_lag1 = sqrt(mean((Auto_EQ_1 - lag(Manual_EQ_1))^2, na.rm = TRUE))
+  )
+
+rmse_lag <- function(auto, manual, nlags){
+  n <- 0
+  manual_lag <- manual
+  if(nlags > 0){
+    while(n < nlags){
+      manual_lag <- lag(manual_lag) 
+      n <- n + 1
+    }
+  } else if(nlags < 0){
+    #if nlags is negative, use lead
+    while(n < -1 * nlags){
+      manual_lag <- lead(manual_lag) 
+      n <- n + 1
+    }
+  }
+  
+  sqrt(mean((auto - manual_lag)^2, na.rm = TRUE))
+}
+
+data %>%
+  summarise(
+   lead3  = rmse_lag(Auto_EQ_1, Manual_EQ_1, -3),
+   lead2 = rmse_lag(Auto_EQ_1, Manual_EQ_1, -2),
+   lead1 = rmse_lag(Auto_EQ_1, Manual_EQ_1, -1),
+   none  = rmse_lag(Auto_EQ_1, Manual_EQ_1, 0),
+   lag1  = rmse_lag(Auto_EQ_1, Manual_EQ_1, 1),
+   lag2  = rmse_lag(Auto_EQ_1, Manual_EQ_1, 2),
+   lag3  = rmse_lag(Auto_EQ_1, Manual_EQ_1, 3)
+  )
+
+
 
 The assessment of the accuracy of the detector data was done in several ways; first, by comparing the detector volume data to the detector occupancy data; comparing these two data sources, it allowed to assess whether the conversion automatically done by the detectors to produce an estimate for volume correlated with the detector occupancy data. 
+
