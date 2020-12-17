@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 Results | Estimation of Ramp Meter Queue Length</title>
+  <meta name="description" content="This is a report of a data analysis project that focuses on analyzing ramp meters in the state of Utah. The goal of the project is to obtain an accurate estimate of the expected wait time for vehicles on the on-ramp." />
+  <meta name="generator" content="bookdown 0.20.6 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 Results | Estimation of Ramp Meter Queue Length" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a report of a data analysis project that focuses on analyzing ramp meters in the state of Utah. The goal of the project is to obtain an accurate estimate of the expected wait time for vehicles on the on-ramp." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 Results | Estimation of Ramp Meter Queue Length" />
+  
+  <meta name="twitter:description" content="This is a report of a data analysis project that focuses on analyzing ramp meters in the state of Utah. The goal of the project is to obtain an accurate estimate of the expected wait time for vehicles on the on-ramp." />
+  
+
+<meta name="author" content="Tanner Daines" />
+
+
+<meta name="date" content="2020-12-16" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="methodology.html"/>
+<link rel="next" href="summary.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+
+
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Estimation of Ramp Meter Queue Length</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Abstract</a></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
+<li class="chapter" data-level="3" data-path="literature.html"><a href="literature.html"><i class="fa fa-check"></i><b>3</b> Literature</a><ul>
+<li class="chapter" data-level="3.1" data-path="literature.html"><a href="literature.html#ramp-metering-design-and-implementation"><i class="fa fa-check"></i><b>3.1</b> Ramp Metering Design and Implementation</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="methodology.html"><a href="methodology.html"><i class="fa fa-check"></i><b>4</b> Methodology</a><ul>
+<li class="chapter" data-level="4.1" data-path="methodology.html"><a href="methodology.html#methods-to-estimate-ramp-queue-length"><i class="fa fa-check"></i><b>4.1</b> Methods to Estimate Ramp Queue Length</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a><ul>
+<li class="chapter" data-level="5.1" data-path="results.html"><a href="results.html#site-description"><i class="fa fa-check"></i><b>5.1</b> Site Description</a></li>
+<li class="chapter" data-level="5.2" data-path="results.html"><a href="results.html#data-collection"><i class="fa fa-check"></i><b>5.2</b> Data Collection</a></li>
+<li class="chapter" data-level="5.3" data-path="results.html"><a href="results.html#data-analysis"><i class="fa fa-check"></i><b>5.3</b> Data Analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="summary.html"><a href="summary.html"><i class="fa fa-check"></i><b>6</b> Summary</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Estimation of Ramp Meter Queue Length</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="results" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> Results</h1>
+<div id="site-description" class="section level2">
+<h2><span class="header-section-number">5.1</span> Site Description</h2>
+<p>The Layton Parkway northbound on-ramp to I-15 has two lanes entering the on-ramp from the west (two lanes turning left onto the ramp) and one lane entering the ramp from the east (one right turn lane). The left turn lanes are controlled by a left-turn only phase at the traffic signal; there is no permitted phase for this turning movement. The right turn lane is free at the entrance to the ramp, but approximately 150 feet into the ramp, there is a yield sign, as this lane ends and must merge with the lane to its left. The ramp is about 540 feet long from the entrance to the ramp meter signal. The ramp metering rate is adaptive, as the ramp metering algorithm used by UDOT automatically modifies the rate each minute as needed, based on detector data. On the day that will presented in results here (August 17, 2020), the metering rate ranged from 450 to 1200 vph.</p>
+</div>
+<div id="data-collection" class="section level2">
+<h2><span class="header-section-number">5.2</span> Data Collection</h2>
+<p>Several days of data collection were conducted during the PM metering period of 4:00 - 6:30 PM in August of 2020. However, this project will present solely the data obtained and analyzed on August 17, 2020 at the northbound Layton Parkway on-ramp to I-15. The data from UDOT is collected via loop detectors at three locations along the on-ramp: near the on-ramp entrance (referred to as “excessive queue” in this report), in the middle of the ramp (“intermediate queue”), and just past the ramp meter signal (“passage”). These data are given in one-minute periods (e.g. 4:00:00 - 4:01:00 PM) in each lane and they include the vehicle volume, the detector occupancy, the number of lanes, and the ramp metering rate.</p>
+<p>The detector data are compared with manual traffic counts of each day, which are also recorded in one-minute periods in each lane. The manual counts include the number of vehicles entering each lane at the excessive queue detectors, the total queue size at the ramp meter signal at the end of each one-minute period, and the number of moving vehicles on the ramp at the end of the one-minute period.</p>
+<p>As an example of the manually collected counts, if from 4:00:00 to 4:01:00 PM, 5 vehicles entered the far left lane, 4 vehicles from the middle lane, and 3 vehicles entered from the right lane, each lane’s count during that one minute would be recorded, and the total number of vehicles entering the ramp during that minute is 12 vehicles. In addition, at 4:01:00 PM, the total queue size at the signal for all lanes is also recorded; perhaps at 4:01:00 PM, the queue size is 7 vehicles. Assuming there was no queue previous to this period, that therefore means that 5 of the 12 vehicles were able to enter the freeway between 4:00:00 and 4:01:00 PM. During the next time period, if a total of 10 new vehicles entered the ramp and at 4:02:00 PM, the queue size was 9 vehicles; that would mean that 9 vehicles would have entered the freeway during that time: the 7 vehicles from the previous time period, plus an additional 2 vehicles that entered the ramp during this time period.</p>
+</div>
+<div id="data-analysis" class="section level2">
+<h2><span class="header-section-number">5.3</span> Data Analysis</h2>
+<p>The data collected on August 17, 2020 were first analyzed to determine whether the detectors were accurate. Several plots of the detector data for that day are shown below. First, this plot shows a comparison between the manually counted volume and the detector recorded volume at each minute period in the far left lane (which may be described as lane “1” throughout the remainder of this report). The x-axis describes the excessive queue detector manually counted volume in Lane 1 (veh/min), whereas the y-axis describes the EQ detector data in Lane 1 (veh/min). Each data point represents a one-minute time period; the <span class="math inline">\(R^2\)</span> value is shown on the plot, represented by the blue line, and is approximately <span class="math inline">\(R^2 = 0.56\)</span>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="results.html#cb1-1"></a>layton_<span class="dv">08</span>_<span class="dv">17</span>_<span class="dv">2020</span> &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;data/layton_08_17_2020.xlsx&quot;</span>)</span>
+<span id="cb1-2"><a href="results.html#cb1-2"></a></span>
+<span id="cb1-3"><a href="results.html#cb1-3"></a><span class="co"># Compare Lane 1 EQ Detector and Manual Counts</span></span>
+<span id="cb1-4"><a href="results.html#cb1-4"></a>formula1 &lt;-<span class="st"> </span>y <span class="op">~</span><span class="st"> </span>x</span>
+<span id="cb1-5"><a href="results.html#cb1-5"></a>eq1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(layton_<span class="dv">08</span>_<span class="dv">17</span>_<span class="dv">2020</span>,<span class="kw">aes</span>(Manual_EQ_<span class="dv">1</span>,Auto_EQ_<span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_jitter</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb1-6"><a href="results.html#cb1-6"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Lane 1 EQ Manual Volume (veh/min)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Lane 1 EQ Detector Volume (veh/min)&quot;</span>) <span class="op">+</span></span>
+<span id="cb1-7"><a href="results.html#cb1-7"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>,<span class="dt">se=</span><span class="ot">FALSE</span>) <span class="op">+</span></span>
+<span id="cb1-8"><a href="results.html#cb1-8"></a><span class="st">  </span><span class="kw">stat_poly_eq</span>(<span class="dt">formula=</span>formula1,<span class="kw">aes</span>(<span class="dt">label=</span><span class="kw">paste</span>(..eq.label..,..rr.label..,<span class="dt">sep=</span><span class="st">&quot;~~~&quot;</span>)),<span class="dt">parse=</span><span class="ot">TRUE</span>)</span>
+<span id="cb1-9"><a href="results.html#cb1-9"></a>  <span class="kw">print</span>(eq1)</span></code></pre></div>
+<p><img src="ceen594r_term_project_files/figure-html/layton_08_17_2020%20Lane%201%20EQ-1.png" width="672" /></p>
+<p>The following plot describes a similar comparison between the manual counts and the detector volumes, but using the data from the “middle lane”, referred to as “Lane 2”. As can be seen, the <span class="math inline">\(R^2\)</span> value equals 0.50 here, slightly worse than the correlation that was shown in Lane 1.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="results.html#cb2-1"></a>layton_<span class="dv">08</span>_<span class="dv">17</span>_<span class="dv">2020</span> &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;data/layton_08_17_2020.xlsx&quot;</span>)</span>
+<span id="cb2-2"><a href="results.html#cb2-2"></a></span>
+<span id="cb2-3"><a href="results.html#cb2-3"></a><span class="co"># Compare Lane 2 EQ Detector and Manual Counts</span></span>
+<span id="cb2-4"><a href="results.html#cb2-4"></a>eq2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(layton_<span class="dv">08</span>_<span class="dv">17</span>_<span class="dv">2020</span>,<span class="kw">aes</span>(Manual_EQ_<span class="dv">2</span>,Auto_EQ_<span class="dv">2</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_jitter</span>() <span class="op">+</span></span>
+<span id="cb2-5"><a href="results.html#cb2-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Lane 2 EQ Manual Volume (veh/min)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Lane 2 EQ Detector Volume (veh/min)&quot;</span>)<span class="op">+</span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>,<span class="dt">se=</span><span class="ot">FALSE</span>) <span class="op">+</span></span>
+<span id="cb2-6"><a href="results.html#cb2-6"></a><span class="st">  </span><span class="kw">stat_poly_eq</span>(<span class="dt">formula=</span>formula1,<span class="kw">aes</span>(<span class="dt">label=</span><span class="kw">paste</span>(..eq.label..,..rr.label..,<span class="dt">sep=</span><span class="st">&quot;~~~&quot;</span>)),<span class="dt">parse=</span><span class="ot">TRUE</span>)</span>
+<span id="cb2-7"><a href="results.html#cb2-7"></a><span class="kw">print</span>(eq2)</span></code></pre></div>
+<p><img src="ceen594r_term_project_files/figure-html/layton_08_17_2020%20Lane%202%20EQ-1.png" width="672" /></p>
+<p>As mentioned throughout the literature review portion of this report, the detection is known to be prone to error. In the case of this ramp, at the time of the data collection, though there is an excessive queue detector present in the right lane (Lane 3), the detection was not yet configured. This therefore means that no volumes were being recorded at the EQ 3 detector. To counteract this issue, a general measure of accuracy of Lane 3 can still be calculated to some degree by using the intermediate queue detector in Lane 2. This requires that the assumption be made that the sum of the manually counted EQ volumes in Lanes 2 and 3 equal what would be the manually counted value at the IQ detector in Lane 2. However, this is likely a realistic assumption because the IQ detector is located soon after the gore point, which would likely prevent from significant movement of vehicles otherwise. With this assumption in mind, the sum of the EQ manually counted volumes from Lanes 2 and 3 are compared with the detector data from the IQ detector in Lane 2. As seen in this plot, the <span class="math inline">\(R^2\)</span> value is the highest of the three results thus far, at <span class="math inline">\(R^2 = 0.76\)</span>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="results.html#cb3-1"></a>layton_<span class="dv">08</span>_<span class="dv">17</span>_<span class="dv">2020</span> &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;data/layton_08_17_2020.xlsx&quot;</span>)</span>
+<span id="cb3-2"><a href="results.html#cb3-2"></a></span>
+<span id="cb3-3"><a href="results.html#cb3-3"></a><span class="co"># Compare IQ Detector Merged into Lane 2 and Manual Counts from EQ Lanes 2+3</span></span>
+<span id="cb3-4"><a href="results.html#cb3-4"></a>iq2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(layton_<span class="dv">08</span>_<span class="dv">17</span>_<span class="dv">2020</span>,<span class="kw">aes</span>(Manual_EQ_<span class="fl">2.3</span>,Auto_IQ_<span class="dv">2</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_jitter</span>() <span class="op">+</span></span>
+<span id="cb3-5"><a href="results.html#cb3-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Lane 3 IQ Manual Volume (veh/min)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Lane 3 IQ Detector Volume (veh/min)&quot;</span>)<span class="op">+</span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>,<span class="dt">se=</span><span class="ot">FALSE</span>) <span class="op">+</span></span>
+<span id="cb3-6"><a href="results.html#cb3-6"></a><span class="st">  </span><span class="kw">stat_poly_eq</span>(<span class="dt">formula=</span>formula1,<span class="kw">aes</span>(<span class="dt">label=</span><span class="kw">paste</span>(..eq.label..,..rr.label..,<span class="dt">sep=</span><span class="st">&quot;~~~&quot;</span>)),<span class="dt">parse=</span><span class="ot">TRUE</span>)</span>
+<span id="cb3-7"><a href="results.html#cb3-7"></a><span class="kw">print</span>(iq2)</span></code></pre></div>
+<p><img src="ceen594r_term_project_files/figure-html/layton_08_17_2020%20Lane%202%20IQ%20vs.%20Manual%20EQ%202+3-1.png" width="672" /></p>
+<p>As a final measure of the accuracy of the detector data, the EQ detector data was compared against the IQ detector data in the same lane, Lane 1. Following the previous assumption of the vehicles mostly remaining in this lane between the EQ and IQ detectors, the plot below gives the results. As can be seen, <span class="math inline">\(R^2 = 0.72\)</span>, which is also acceptable.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="results.html#cb4-1"></a>layton_<span class="dv">08</span>_<span class="dv">17</span>_<span class="dv">2020</span> &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;data/layton_08_17_2020.xlsx&quot;</span>)</span>
+<span id="cb4-2"><a href="results.html#cb4-2"></a></span>
+<span id="cb4-3"><a href="results.html#cb4-3"></a><span class="co">#Compare intermediate and excessive queue counts</span></span>
+<span id="cb4-4"><a href="results.html#cb4-4"></a>q1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(layton_<span class="dv">08</span>_<span class="dv">17</span>_<span class="dv">2020</span>,<span class="kw">aes</span>(Auto_IQ_<span class="dv">1</span>,Auto_EQ_<span class="dv">1</span>)) <span class="op">+</span></span>
+<span id="cb4-5"><a href="results.html#cb4-5"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Left Lane IQ Detector Volume (veh)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Left Lane EQ Detector Volume (veh)&quot;</span>) <span class="op">+</span></span>
+<span id="cb4-6"><a href="results.html#cb4-6"></a><span class="st">  </span><span class="kw">geom_jitter</span>()<span class="op">+</span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>,<span class="dt">se=</span><span class="ot">FALSE</span>)<span class="op">+</span></span>
+<span id="cb4-7"><a href="results.html#cb4-7"></a><span class="st">  </span><span class="kw">stat_poly_eq</span>(<span class="dt">formula=</span>formula1,<span class="kw">aes</span>(<span class="dt">label=</span><span class="kw">paste</span>(..eq.label..,..rr.label..,<span class="dt">sep=</span><span class="st">&quot;~~~&quot;</span>)),<span class="dt">parse=</span><span class="ot">TRUE</span>)</span>
+<span id="cb4-8"><a href="results.html#cb4-8"></a><span class="kw">print</span>(q1)</span></code></pre></div>
+<p><img src="ceen594r_term_project_files/figure-html/layton_08_17_2020%20Lane%201%20EQ%20vs%20IQ-1.png" width="672" /></p>
+<p>Overall, these four measures of the quality of the detector data show that, while the detectors are not perfect, they provide somewhat reasonable results as a beginning point. However, upon further analysis of the data, it was discovered that the time recordings of the detector data and the manually counted data were different. In this case, the detector data is approximately 60-120 seconds behind the field collected data. This would likely account for some of the error that was seen above, when comparing the detector data to the field data.</p>
+<p>A method was developed (see below) that seeks to automatically align the two data sets. The methodology seen below allows for only a three minute buffer in either direction–moving the field data as much as three minutes earlier or three minutes later than it was originally recorded. The data used to make this adjustment is from Lane 1. Though still not perfect, the plot shown below compares the lead/lag time-adjusted field counts to the detector data, and the two data sets resemble each other well throughout the data collection period 4:00 PM to 6:30 PM.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="results.html#cb5-1"></a>layton_<span class="dv">08</span>_<span class="dv">17</span>_<span class="dv">2020</span> &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;data/layton_08_17_2020.xlsx&quot;</span>)</span>
+<span id="cb5-2"><a href="results.html#cb5-2"></a>layton_<span class="dv">08</span>_<span class="dv">17</span>_<span class="dv">2020</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">transmute</span>(<span class="st">`</span><span class="dt">Start time</span><span class="st">`</span>, <span class="dt">Detector =</span> Auto_EQ_<span class="dv">1</span>, <span class="dt">Manual =</span> <span class="kw">lag</span>(Manual_EQ_<span class="dv">1</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb5-3"><a href="results.html#cb5-3"></a><span class="st"> </span><span class="kw">gather</span>(<span class="dt">key =</span> <span class="st">&quot;Legend&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;# of Vehicles&quot;</span>, <span class="op">-</span><span class="st">`</span><span class="dt">Start time</span><span class="st">`</span>)  <span class="op">%&gt;%</span></span>
+<span id="cb5-4"><a href="results.html#cb5-4"></a><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="st">`</span><span class="dt">Start time</span><span class="st">`</span>, <span class="dt">y =</span> <span class="st">`</span><span class="dt"># of Vehicles</span><span class="st">`</span>, <span class="dt">color =</span> <span class="st">`</span><span class="dt">Legend</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb5-5"><a href="results.html#cb5-5"></a><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></span>
+<span id="cb5-6"><a href="results.html#cb5-6"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;08/17/2020 Manual vs Detector Counts Using Lead/Lag Adjustment&quot;</span>) <span class="op">+</span></span>
+<span id="cb5-7"><a href="results.html#cb5-7"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">12</span>,<span class="dv">14</span>,<span class="dv">16</span>,<span class="dv">18</span>,<span class="dv">20</span>))</span></code></pre></div>
+<p><img src="ceen594r_term_project_files/figure-html/layton_08_17_20%20Manual%20vs.%20Lead/Lag-1.png" width="672" /></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="results.html#cb6-1"></a>rmse_lag &lt;-<span class="st"> </span><span class="cf">function</span>(auto, manual, nlags){</span>
+<span id="cb6-2"><a href="results.html#cb6-2"></a>  n &lt;-<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb6-3"><a href="results.html#cb6-3"></a>  manual_lag &lt;-<span class="st"> </span>manual</span>
+<span id="cb6-4"><a href="results.html#cb6-4"></a>  <span class="cf">if</span>(nlags <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>){</span>
+<span id="cb6-5"><a href="results.html#cb6-5"></a>    <span class="cf">while</span>(n <span class="op">&lt;</span><span class="st"> </span>nlags){</span>
+<span id="cb6-6"><a href="results.html#cb6-6"></a>      manual_lag &lt;-<span class="st"> </span><span class="kw">lag</span>(manual_lag) </span>
+<span id="cb6-7"><a href="results.html#cb6-7"></a>      n &lt;-<span class="st"> </span>n <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb6-8"><a href="results.html#cb6-8"></a>    }</span>
+<span id="cb6-9"><a href="results.html#cb6-9"></a>  } <span class="cf">else</span> <span class="cf">if</span>(nlags <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>){</span>
+<span id="cb6-10"><a href="results.html#cb6-10"></a>    <span class="co">#if nlags is negative, use lead</span></span>
+<span id="cb6-11"><a href="results.html#cb6-11"></a>    <span class="cf">while</span>(n <span class="op">&lt;</span><span class="st"> </span><span class="dv">-1</span> <span class="op">*</span><span class="st"> </span>nlags){</span>
+<span id="cb6-12"><a href="results.html#cb6-12"></a>      manual_lag &lt;-<span class="st"> </span><span class="kw">lead</span>(manual_lag) </span>
+<span id="cb6-13"><a href="results.html#cb6-13"></a>      n &lt;-<span class="st"> </span>n <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb6-14"><a href="results.html#cb6-14"></a>    }</span>
+<span id="cb6-15"><a href="results.html#cb6-15"></a>  }</span>
+<span id="cb6-16"><a href="results.html#cb6-16"></a>  <span class="kw">sqrt</span>(<span class="kw">mean</span>((auto <span class="op">-</span><span class="st"> </span>manual_lag)<span class="op">^</span><span class="dv">2</span>, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</span>
+<span id="cb6-17"><a href="results.html#cb6-17"></a>}</span>
+<span id="cb6-18"><a href="results.html#cb6-18"></a>layton_<span class="dv">08</span>_<span class="dv">17</span>_<span class="dv">2020</span> <span class="op">%&gt;%</span></span>
+<span id="cb6-19"><a href="results.html#cb6-19"></a><span class="st">  </span><span class="kw">summarise</span>(</span>
+<span id="cb6-20"><a href="results.html#cb6-20"></a>   <span class="dt">lead3  =</span> <span class="kw">rmse_lag</span>(Auto_EQ_<span class="dv">1</span>, Manual_EQ_<span class="dv">1</span>, <span class="dv">-3</span>),</span>
+<span id="cb6-21"><a href="results.html#cb6-21"></a>   <span class="dt">lead2 =</span> <span class="kw">rmse_lag</span>(Auto_EQ_<span class="dv">1</span>, Manual_EQ_<span class="dv">1</span>, <span class="dv">-2</span>),</span>
+<span id="cb6-22"><a href="results.html#cb6-22"></a>   <span class="dt">lead1 =</span> <span class="kw">rmse_lag</span>(Auto_EQ_<span class="dv">1</span>, Manual_EQ_<span class="dv">1</span>, <span class="dv">-1</span>),</span>
+<span id="cb6-23"><a href="results.html#cb6-23"></a>   <span class="dt">none  =</span> <span class="kw">rmse_lag</span>(Auto_EQ_<span class="dv">1</span>, Manual_EQ_<span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb6-24"><a href="results.html#cb6-24"></a>   <span class="dt">lag1  =</span> <span class="kw">rmse_lag</span>(Auto_EQ_<span class="dv">1</span>, Manual_EQ_<span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb6-25"><a href="results.html#cb6-25"></a>   <span class="dt">lag2  =</span> <span class="kw">rmse_lag</span>(Auto_EQ_<span class="dv">1</span>, Manual_EQ_<span class="dv">1</span>, <span class="dv">2</span>),</span>
+<span id="cb6-26"><a href="results.html#cb6-26"></a>   <span class="dt">lag3  =</span> <span class="kw">rmse_lag</span>(Auto_EQ_<span class="dv">1</span>, Manual_EQ_<span class="dv">1</span>, <span class="dv">3</span>)</span>
+<span id="cb6-27"><a href="results.html#cb6-27"></a>  )</span></code></pre></div>
+<pre><code>## # A tibble: 1 x 7
+##   lead3 lead2 lead1  none  lag1  lag2  lag3
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  2.97  2.73  3.45  1.54  3.28  3.13  2.79</code></pre>
+<p>With this methodology developed, the Conservation Model and Kalman Filter Model may now be more accurately used to predict the queue length on the ramp. The volume-balancing ratio <span class="math inline">\(C\)</span> for this time period was determined to be approximately <span class="math inline">\(1.67\)</span> by using a Goal Seek function on Microsoft Excel. While, as explained in the literature review, the Kalman filtering coefficient, <span class="math inline">\(K = 0.22\)</span>. <span class="math inline">\(L_E\)</span>, the effective vehicle length, was assumed to be <span class="math inline">\(24 ft\)</span>, per Wu et al. (2009). The approximated ramp length, which was measured using Google Earth, was found to be <span class="math inline">\(L_R = 537 ft\)</span>. Using this information, the field data, and the detector data, both the Conservation Model and the Kalman Filter model can be developed. The figure below shows that there remains some work to be done to further refine the balanced conservation model, but this plot does provide some telling information about how the model does somewhat reflect the field collected data.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="results.html#cb8-1"></a>layton_<span class="dv">08</span>_<span class="dv">17</span>_<span class="dv">2020</span> &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;data/layton_08_17_2020.xlsx&quot;</span>)</span>
+<span id="cb8-2"><a href="results.html#cb8-2"></a>layton_<span class="dv">08</span>_<span class="dv">17</span>_<span class="dv">2020</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">transmute</span>(<span class="st">`</span><span class="dt">Start time</span><span class="st">`</span>, <span class="dt">Detector =</span> Conserv_balanced, <span class="dt">Manual =</span> <span class="kw">lag</span>(<span class="st">`</span><span class="dt">Queue size</span><span class="st">`</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb8-3"><a href="results.html#cb8-3"></a><span class="st"> </span><span class="kw">gather</span>(<span class="dt">key =</span> <span class="st">&quot;Legend&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;Queue Size&quot;</span>, <span class="op">-</span><span class="st">`</span><span class="dt">Start time</span><span class="st">`</span>)  <span class="op">%&gt;%</span></span>
+<span id="cb8-4"><a href="results.html#cb8-4"></a><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="st">`</span><span class="dt">Start time</span><span class="st">`</span>, <span class="dt">y =</span> <span class="st">`</span><span class="dt">Queue Size</span><span class="st">`</span>, <span class="dt">color =</span> <span class="st">`</span><span class="dt">Legend</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb8-5"><a href="results.html#cb8-5"></a><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></span>
+<span id="cb8-6"><a href="results.html#cb8-6"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;08/17/2020 Manual vs Detector Counts Using Conservation Model&quot;</span>) <span class="op">+</span></span>
+<span id="cb8-7"><a href="results.html#cb8-7"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">12</span>,<span class="dv">14</span>,<span class="dv">16</span>,<span class="dv">18</span>,<span class="dv">20</span>,<span class="dv">22</span>,<span class="dv">24</span>))</span></code></pre></div>
+<p><img src="ceen594r_term_project_files/figure-html/layton_08_17_2020%20Manual%20vs.%20Conservation%20Model-1.png" width="672" /></p>
+<p>The Kalman filter model vs. the field collected data is shown in the plot below. Because the Kalman filter model is strongly based on the Conservation Model, the two plots strongly resemble one another. However, with the additional factor with the <span class="math inline">\(K\)</span> coefficient, the Kalman filter model seeks to improve on the Conservation model.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="results.html#cb9-1"></a>layton_<span class="dv">08</span>_<span class="dv">17</span>_<span class="dv">2020</span> &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;data/layton_08_17_2020.xlsx&quot;</span>)</span>
+<span id="cb9-2"><a href="results.html#cb9-2"></a>layton_<span class="dv">08</span>_<span class="dv">17</span>_<span class="dv">2020</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">transmute</span>(<span class="st">`</span><span class="dt">Start time</span><span class="st">`</span>, <span class="dt">Detector =</span> Kalman_balanced, <span class="dt">Manual =</span> <span class="kw">lag</span>(<span class="st">`</span><span class="dt">Queue size</span><span class="st">`</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb9-3"><a href="results.html#cb9-3"></a><span class="st"> </span><span class="kw">gather</span>(<span class="dt">key =</span> <span class="st">&quot;Legend&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;Queue Size&quot;</span>, <span class="op">-</span><span class="st">`</span><span class="dt">Start time</span><span class="st">`</span>)  <span class="op">%&gt;%</span></span>
+<span id="cb9-4"><a href="results.html#cb9-4"></a><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="st">`</span><span class="dt">Start time</span><span class="st">`</span>, <span class="dt">y =</span> <span class="st">`</span><span class="dt">Queue Size</span><span class="st">`</span>, <span class="dt">color =</span> <span class="st">`</span><span class="dt">Legend</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb9-5"><a href="results.html#cb9-5"></a><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></span>
+<span id="cb9-6"><a href="results.html#cb9-6"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;08/17/2020 Manual vs Detector Counts Using Kalman Filter Model&quot;</span>) <span class="op">+</span></span>
+<span id="cb9-7"><a href="results.html#cb9-7"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">12</span>,<span class="dv">14</span>,<span class="dv">16</span>,<span class="dv">18</span>,<span class="dv">20</span>,<span class="dv">22</span>,<span class="dv">24</span>))</span></code></pre></div>
+<p><img src="ceen594r_term_project_files/figure-html/layton_08_17_2020%20Manual%20vs.%20Kalman%20Filter%20Model-1.png" width="672" /></p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="methodology.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="summary.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["ceen594r_term_project.pdf", "ceen594r_term_project.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

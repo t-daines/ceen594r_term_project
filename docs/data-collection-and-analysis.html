@@ -24,7 +24,7 @@
 <meta name="author" content="Tanner Daines" />
 
 
-<meta name="date" content="2020-11-30" />
+<meta name="date" content="2020-12-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -53,6 +53,70 @@
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
+<style type="text/css">
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -114,6 +178,80 @@
 </div>
 <div id="data-analysis" class="section level2">
 <h2><span class="header-section-number">5.3</span> Data Analysis</h2>
+<p>The data collected from the five days were first analyzed to determine whether the detectors were accurate.The data for August 17, 2020 is shown below in Figure .This plot shows a comparison between the</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="data-collection-and-analysis.html#cb1-1"></a>layton_<span class="dv">08</span>_<span class="dv">17</span>_<span class="dv">2020</span> &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;data/layton_08_17_2020.xlsx&quot;</span>)</span>
+<span id="cb1-2"><a href="data-collection-and-analysis.html#cb1-2"></a></span>
+<span id="cb1-3"><a href="data-collection-and-analysis.html#cb1-3"></a><span class="co"># Compare lane 1 EQ auto and manual counts</span></span>
+<span id="cb1-4"><a href="data-collection-and-analysis.html#cb1-4"></a>formula1 &lt;-<span class="st"> </span>y <span class="op">~</span><span class="st"> </span>x</span>
+<span id="cb1-5"><a href="data-collection-and-analysis.html#cb1-5"></a>eq1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(layton_<span class="dv">08</span>_<span class="dv">17</span>_<span class="dv">2020</span>,<span class="kw">aes</span>(Manual_EQ_<span class="fl">1.2</span>,Auto_EQ_<span class="dv">1</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_jitter</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb1-6"><a href="data-collection-and-analysis.html#cb1-6"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Left Lane EQ Manual Volume (veh)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Left Lane EQ Detector Volume (veh)&quot;</span>) <span class="op">+</span></span>
+<span id="cb1-7"><a href="data-collection-and-analysis.html#cb1-7"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>,<span class="dt">se=</span><span class="ot">FALSE</span>) <span class="op">+</span></span>
+<span id="cb1-8"><a href="data-collection-and-analysis.html#cb1-8"></a><span class="st">  </span><span class="kw">stat_poly_eq</span>(<span class="dt">formula=</span>formula1,<span class="kw">aes</span>(<span class="dt">label=</span><span class="kw">paste</span>(..eq.label..,..rr.label..,<span class="dt">sep=</span><span class="st">&quot;~~~&quot;</span>)),<span class="dt">parse=</span><span class="ot">TRUE</span>)</span>
+<span id="cb1-9"><a href="data-collection-and-analysis.html#cb1-9"></a><span class="kw">print</span>(eq1)</span></code></pre></div>
+<p><img src="ceen594r_term_project_files/figure-html/layton_08_17_2020-1.png" width="672" /></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="data-collection-and-analysis.html#cb2-1"></a><span class="co"># Compare lane 2 EQ auto and manual counts</span></span>
+<span id="cb2-2"><a href="data-collection-and-analysis.html#cb2-2"></a>eq2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(layton_<span class="dv">08</span>_<span class="dv">17</span>_<span class="dv">2020</span>,<span class="kw">aes</span>(Manual_EQ_<span class="dv">3</span>,Auto_EQ_<span class="dv">2</span>)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_jitter</span>() <span class="op">+</span></span>
+<span id="cb2-3"><a href="data-collection-and-analysis.html#cb2-3"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Right Lane EQ Manual Volume (veh)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Right Lane EQ Detector Volume (veh)&quot;</span>)<span class="op">+</span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>,<span class="dt">se=</span><span class="ot">FALSE</span>) <span class="op">+</span></span>
+<span id="cb2-4"><a href="data-collection-and-analysis.html#cb2-4"></a><span class="st">  </span><span class="kw">stat_poly_eq</span>(<span class="dt">formula=</span>formula1,<span class="kw">aes</span>(<span class="dt">label=</span><span class="kw">paste</span>(..eq.label..,..rr.label..,<span class="dt">sep=</span><span class="st">&quot;~~~&quot;</span>)),<span class="dt">parse=</span><span class="ot">TRUE</span>)</span>
+<span id="cb2-5"><a href="data-collection-and-analysis.html#cb2-5"></a><span class="kw">print</span>(eq2)</span></code></pre></div>
+<p><img src="ceen594r_term_project_files/figure-html/layton_08_17_2020-2.png" width="672" /></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="data-collection-and-analysis.html#cb3-1"></a><span class="co">#Compare intermediate and excessive queue counts</span></span>
+<span id="cb3-2"><a href="data-collection-and-analysis.html#cb3-2"></a>q1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(layton_<span class="dv">08</span>_<span class="dv">17</span>_<span class="dv">2020</span>,<span class="kw">aes</span>(Auto_IQ_<span class="dv">1</span>,Auto_EQ_<span class="dv">1</span>)) <span class="op">+</span></span>
+<span id="cb3-3"><a href="data-collection-and-analysis.html#cb3-3"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Left Lane IQ Detector Volume (veh)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Left Lane EQ Detector Volume (veh)&quot;</span>) <span class="op">+</span></span>
+<span id="cb3-4"><a href="data-collection-and-analysis.html#cb3-4"></a><span class="st">  </span><span class="kw">geom_jitter</span>()<span class="op">+</span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>,<span class="dt">se=</span><span class="ot">FALSE</span>)<span class="op">+</span></span>
+<span id="cb3-5"><a href="data-collection-and-analysis.html#cb3-5"></a><span class="st">  </span><span class="kw">stat_poly_eq</span>(<span class="dt">formula=</span>formula1,<span class="kw">aes</span>(<span class="dt">label=</span><span class="kw">paste</span>(..eq.label..,..rr.label..,<span class="dt">sep=</span><span class="st">&quot;~~~&quot;</span>)),<span class="dt">parse=</span><span class="ot">TRUE</span>)</span>
+<span id="cb3-6"><a href="data-collection-and-analysis.html#cb3-6"></a><span class="kw">print</span>(q1)</span></code></pre></div>
+<p><img src="ceen594r_term_project_files/figure-html/layton_08_17_2020-3.png" width="672" /></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="data-collection-and-analysis.html#cb4-1"></a>q2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(layton_<span class="dv">08</span>_<span class="dv">17</span>_<span class="dv">2020</span>,<span class="kw">aes</span>(Auto_IQ_<span class="dv">2</span>,Auto_EQ_<span class="dv">2</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb4-2"><a href="data-collection-and-analysis.html#cb4-2"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Right Lane IQ Detector Volume (veh)&quot;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&quot;Right Lane EQ Detector Volume (veh)&quot;</span>) <span class="op">+</span></span>
+<span id="cb4-3"><a href="data-collection-and-analysis.html#cb4-3"></a><span class="st">  </span><span class="kw">geom_jitter</span>()<span class="op">+</span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>,<span class="dt">se=</span><span class="ot">FALSE</span>)<span class="op">+</span></span>
+<span id="cb4-4"><a href="data-collection-and-analysis.html#cb4-4"></a><span class="st">  </span><span class="kw">stat_poly_eq</span>(<span class="dt">formula=</span>formula1,<span class="kw">aes</span>(<span class="dt">label=</span><span class="kw">paste</span>(..eq.label..,..rr.label..,<span class="dt">sep=</span><span class="st">&quot;~~~&quot;</span>)),<span class="dt">parse=</span><span class="ot">TRUE</span>)</span>
+<span id="cb4-5"><a href="data-collection-and-analysis.html#cb4-5"></a><span class="kw">print</span>(q2)</span></code></pre></div>
+<p><img src="ceen594r_term_project_files/figure-html/layton_08_17_2020-4.png" width="672" /></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="data-collection-and-analysis.html#cb5-1"></a>layton_<span class="dv">08</span>_<span class="dv">17</span>_<span class="dv">2020</span> &lt;-<span class="st"> </span><span class="kw">read_excel</span>(<span class="st">&quot;data/layton_08_17_2020.xlsx&quot;</span>)</span>
+<span id="cb5-2"><a href="data-collection-and-analysis.html#cb5-2"></a>layton_<span class="dv">08</span>_<span class="dv">17</span>_<span class="dv">2020</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">transmute</span>(<span class="st">`</span><span class="dt">Start time</span><span class="st">`</span>, <span class="dt">Detector =</span> Auto_EQ_<span class="dv">1</span>, <span class="dt">Manual =</span> <span class="kw">lag</span>(Manual_EQ_<span class="dv">1</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb5-3"><a href="data-collection-and-analysis.html#cb5-3"></a><span class="st"> </span><span class="kw">gather</span>(<span class="dt">key =</span> <span class="st">&quot;Legend&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;Queue Size&quot;</span>, <span class="op">-</span><span class="st">`</span><span class="dt">Start time</span><span class="st">`</span>)  <span class="op">%&gt;%</span></span>
+<span id="cb5-4"><a href="data-collection-and-analysis.html#cb5-4"></a><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="st">`</span><span class="dt">Start time</span><span class="st">`</span>, <span class="dt">y =</span> <span class="st">`</span><span class="dt">Queue Size</span><span class="st">`</span>, <span class="dt">color =</span> <span class="st">`</span><span class="dt">Legend</span><span class="st">`</span>)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb5-5"><a href="data-collection-and-analysis.html#cb5-5"></a><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></span>
+<span id="cb5-6"><a href="data-collection-and-analysis.html#cb5-6"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;08/17/2020 Manual vs Detector Counts Using Lead/Lag Adjustment&quot;</span>) <span class="op">+</span></span>
+<span id="cb5-7"><a href="data-collection-and-analysis.html#cb5-7"></a><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">breaks=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">10</span>,<span class="dv">12</span>,<span class="dv">14</span>,<span class="dv">16</span>,<span class="dv">18</span>,<span class="dv">20</span>))</span></code></pre></div>
+<p><img src="ceen594r_term_project_files/figure-html/layton_08_17_20-1.png" width="672" /></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="data-collection-and-analysis.html#cb6-1"></a>rmse_lag &lt;-<span class="st"> </span><span class="cf">function</span>(auto, manual, nlags){</span>
+<span id="cb6-2"><a href="data-collection-and-analysis.html#cb6-2"></a>  n &lt;-<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb6-3"><a href="data-collection-and-analysis.html#cb6-3"></a>  manual_lag &lt;-<span class="st"> </span>manual</span>
+<span id="cb6-4"><a href="data-collection-and-analysis.html#cb6-4"></a>  <span class="cf">if</span>(nlags <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>){</span>
+<span id="cb6-5"><a href="data-collection-and-analysis.html#cb6-5"></a>    <span class="cf">while</span>(n <span class="op">&lt;</span><span class="st"> </span>nlags){</span>
+<span id="cb6-6"><a href="data-collection-and-analysis.html#cb6-6"></a>      manual_lag &lt;-<span class="st"> </span><span class="kw">lag</span>(manual_lag) </span>
+<span id="cb6-7"><a href="data-collection-and-analysis.html#cb6-7"></a>      n &lt;-<span class="st"> </span>n <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb6-8"><a href="data-collection-and-analysis.html#cb6-8"></a>    }</span>
+<span id="cb6-9"><a href="data-collection-and-analysis.html#cb6-9"></a>  } <span class="cf">else</span> <span class="cf">if</span>(nlags <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>){</span>
+<span id="cb6-10"><a href="data-collection-and-analysis.html#cb6-10"></a>    <span class="co">#if nlags is negative, use lead</span></span>
+<span id="cb6-11"><a href="data-collection-and-analysis.html#cb6-11"></a>    <span class="cf">while</span>(n <span class="op">&lt;</span><span class="st"> </span><span class="dv">-1</span> <span class="op">*</span><span class="st"> </span>nlags){</span>
+<span id="cb6-12"><a href="data-collection-and-analysis.html#cb6-12"></a>      manual_lag &lt;-<span class="st"> </span><span class="kw">lead</span>(manual_lag) </span>
+<span id="cb6-13"><a href="data-collection-and-analysis.html#cb6-13"></a>      n &lt;-<span class="st"> </span>n <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb6-14"><a href="data-collection-and-analysis.html#cb6-14"></a>    }</span>
+<span id="cb6-15"><a href="data-collection-and-analysis.html#cb6-15"></a>  }</span>
+<span id="cb6-16"><a href="data-collection-and-analysis.html#cb6-16"></a>  <span class="kw">sqrt</span>(<span class="kw">mean</span>((auto <span class="op">-</span><span class="st"> </span>manual_lag)<span class="op">^</span><span class="dv">2</span>, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</span>
+<span id="cb6-17"><a href="data-collection-and-analysis.html#cb6-17"></a>}</span>
+<span id="cb6-18"><a href="data-collection-and-analysis.html#cb6-18"></a>layton_<span class="dv">08</span>_<span class="dv">17</span>_<span class="dv">2020</span> <span class="op">%&gt;%</span></span>
+<span id="cb6-19"><a href="data-collection-and-analysis.html#cb6-19"></a><span class="st">  </span><span class="kw">summarise</span>(</span>
+<span id="cb6-20"><a href="data-collection-and-analysis.html#cb6-20"></a>   <span class="dt">lead3  =</span> <span class="kw">rmse_lag</span>(Auto_EQ_<span class="dv">1</span>, Manual_EQ_<span class="dv">1</span>, <span class="dv">-3</span>),</span>
+<span id="cb6-21"><a href="data-collection-and-analysis.html#cb6-21"></a>   <span class="dt">lead2 =</span> <span class="kw">rmse_lag</span>(Auto_EQ_<span class="dv">1</span>, Manual_EQ_<span class="dv">1</span>, <span class="dv">-2</span>),</span>
+<span id="cb6-22"><a href="data-collection-and-analysis.html#cb6-22"></a>   <span class="dt">lead1 =</span> <span class="kw">rmse_lag</span>(Auto_EQ_<span class="dv">1</span>, Manual_EQ_<span class="dv">1</span>, <span class="dv">-1</span>),</span>
+<span id="cb6-23"><a href="data-collection-and-analysis.html#cb6-23"></a>   <span class="dt">none  =</span> <span class="kw">rmse_lag</span>(Auto_EQ_<span class="dv">1</span>, Manual_EQ_<span class="dv">1</span>, <span class="dv">0</span>),</span>
+<span id="cb6-24"><a href="data-collection-and-analysis.html#cb6-24"></a>   <span class="dt">lag1  =</span> <span class="kw">rmse_lag</span>(Auto_EQ_<span class="dv">1</span>, Manual_EQ_<span class="dv">1</span>, <span class="dv">1</span>),</span>
+<span id="cb6-25"><a href="data-collection-and-analysis.html#cb6-25"></a>   <span class="dt">lag2  =</span> <span class="kw">rmse_lag</span>(Auto_EQ_<span class="dv">1</span>, Manual_EQ_<span class="dv">1</span>, <span class="dv">2</span>),</span>
+<span id="cb6-26"><a href="data-collection-and-analysis.html#cb6-26"></a>   <span class="dt">lag3  =</span> <span class="kw">rmse_lag</span>(Auto_EQ_<span class="dv">1</span>, Manual_EQ_<span class="dv">1</span>, <span class="dv">3</span>)</span>
+<span id="cb6-27"><a href="data-collection-and-analysis.html#cb6-27"></a>  )</span></code></pre></div>
+<pre><code>## # A tibble: 1 x 7
+##   lead3 lead2 lead1  none  lag1  lag2  lag3
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  2.97  2.73  3.45  1.54  3.28  3.13  2.79</code></pre>
+<p>data.table(
+name=c(“lead3”,“lead2”,“lead1”,“None”,“lag1”,“lag2”,“lag3”),
+value=c(“2.97”,“2.73”,“3.45”,<em>“1.54”</em>,“3.28”,“3.13”,“2.79”)
+)</p>
+<p>The assessment of the accuracy of the detector data was done in several ways; first, by comparing the detector volume data to the detector occupancy data; comparing these two data sources, it allowed to assess whether the conversion automatically done by the detectors to produce an estimate for volume correlated with the detector occupancy data.</p>
 
 </div>
 </div>

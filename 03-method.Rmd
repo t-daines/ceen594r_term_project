@@ -1,4 +1,6 @@
-# Methods to Estimate Ramp Queue Length
+# Methodology
+
+## Methods to Estimate Ramp Queue Length
 
 By using loop detectors on the ramps, time occupancy and traffic volume data are gathered. Occupancy refers to the percent of time a point on the road is occupied by a vehicle; for example, if no vehicle passes over the detector during a given time period, the occupancy would be 0 percent, whereas if a vehicle was detected passing over the detector during half of that same time period, the time occupancy would show 50 percent [@wu2009methodologies]. Wu et al. (2009) use the volume and occupancy data from the detectors by comparing three methods of calculating the queue length, including a Kalman filter, a conservation model, and the Highway Capacity Manual (HCM) back of queue method (the HCM method proved to be ineffective, and will not be discussed in detail in this report). The original equations developed for the conservation model and Kalman filter algorithms required the volume entering and exiting the ramp to be equal, but through analysis, they found that the detectors introduced error when compared with field recorded traffic volumes. 
 
