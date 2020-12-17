@@ -6,7 +6,7 @@ library(readxl)
 library(ggplot2)
 library(ggpmisc)
 library(scales)
-options(knitr.duplicate.label = "allow")
+library(DT)
 
 ```
 
@@ -153,10 +153,19 @@ ggplot(aes(x = `Start time`, y = `Queue Size`, color = `Legend`)) +
 
 In many cases in both the Conservation Model and the Kalman Filter Model, the anticipated queue size is 0. This leads to underestimating the expected queue length on a majority of the time periods throughout the data collected on August 17, 2020. Further research is recommended to determine the reasoning behind this, and seek to find a correction to this issue with the algorithm.
 
-Table 1 below shows the data in its raw form prior to being manipulated and used for creating the plots.
+Table 1 shows the most significant data, including the manually counted queue size, the estimated conservation model queue size, and the Kalman filter model queue size.
 
-```{r layton_08_17_2020 Table}
+```{r layton 08_17_2020_model_estimation Table}
+library(readxl)
+layton_08_17_2020_model_estimation <- read_excel("data/layton_08_17_2020_model_estimation.xlsx")
+datatable(head(layton_08_17_2020_model_estimation),class='cell-border-stripe',colnames=c("Manual","Conservation","Kalman"),caption='Table 1: Queue Size Estimation')
+
+```
+
+Table 2 below shows the data in its raw form prior to being manipulated and used for creating the plots.
+
+```{r layton_08_17_2020 Raw Data Table}
 library(readxl)
 layton_08_17_2020 <- read_excel("data/layton_08_17_2020.xlsx")
-View(layton_08_17_2020)
+datatable(head(layton_08_17_2020),class='cell-border stripe',caption='Table 2: Raw Data Table 08/17/2020')
 ```
