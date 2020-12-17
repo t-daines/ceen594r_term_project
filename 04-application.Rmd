@@ -155,7 +155,7 @@ In many cases in both the Conservation Model and the Kalman Filter Model, the an
 
 Table 1 below shows the data in its raw form prior to being manipulated and used for creating the plots.
 
-```{layton_08_17_2020 Table}
+```{r layton_08_17_2020 Table}
 library(readxl)
 layton_08_17_2020 <- read_excel("data/layton_08_17_2020.xlsx")
 View(layton_08_17_2020)
