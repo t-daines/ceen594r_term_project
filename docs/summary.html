@@ -24,7 +24,7 @@
 <meta name="author" content="Tanner Daines" />
 
 
-<meta name="date" content="2020-12-16" />
+<meta name="date" content="2020-12-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -51,6 +51,14 @@
 
 
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<script src="libs/htmlwidgets-1.5.1/htmlwidgets.js"></script>
+<link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+<script src="libs/datatables-binding-0.16/datatables.js"></script>
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+<script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
 
 
 <style type="text/css">
@@ -171,7 +179,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="summary" class="section level1">
 <h1><span class="header-section-number">Chapter 6</span> Summary</h1>
-<p>The expected wait time at an on-ramp is directly related to the queue length that occurs due to the ramp meter signal. There are few algorithms currently developed to estimate the wait time at freeway entrance ramps solely from detector data, and more research remains to be done. Most of the algorithms currently available require extensive calibration by performing manual traffic counts, which is expensive and time consuming. However, the Kalman filter and conservation model equations have proven to show reliable estimates of the actual wait time, when compared with manual counts. These equations will provide a more accurate estimate of the quality of detector data available and will be a crucial step in estimating the wait time of vehicles at this ramp. Further study is currently being conducted for this project to find a correlation between the queue length and wait time, and by finding this correlation, the expected wait time at on-ramps will be more precisely predicted.</p>
+<p>This project analyzed the expected queue length of vehicles on a metered on-ramp at the nortbound on-ramp at Layton Parkway to I-15. The manual data collection took place on August 17, 2020, and was compared with detector data provided by UDOT.</p>
+<p>The expected queue length at an on-ramp can be estimated by using detector data provided by a local department of transportation. By using different data points, the queue length that occurs due to the ramp meter signal can be measured. There are few algorithms currently developed to estimate the queue at freeway entrance ramps solely from detector data, and more research remains to be done. Most of the algorithms currently available require extensive calibration by performing manual traffic counts, which is expensive and time consuming. However, the Kalman filter and conservation model equations have proven to show somewhat reliable estimates of the actual queue length, when compared with manual counts; though more research remains to be done in this case with UDOT in having several time periods with an estimated queue size of 0 vehicles, whena queue was present.</p>
+<p>However, these equations will provide a more accurate estimate of the quality of detector data available and will be a crucial step in estimating the queue length of vehicles at this ramp. Further study is currently being conducted for this project to find a correlation between the queue length and wait time, and by finding this correlation, the expected wait time at on-ramps will be more precisely predicted, which will help UDOT further their interest in providing better freeway and ramp conditions along I-15.</p>
 
 </div>
             </section>
