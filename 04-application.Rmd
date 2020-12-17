@@ -23,7 +23,7 @@ As an example of the manually collected counts, if from 4:00:00 to 4:01:00 PM, 5
 
 ## Data Analysis
 
-The data collected on August 17, 2020 were first analyzed to determine whether the detectors were accurate. Several plots of the detector data for that day are shown below. First, this plot shows a comparison between the manually counted volume and the detector recorded volume at each minute period in the far left lane (which may be described as lane "1" throughout the remainder of this report). The x-axis describes the excessive queue detector manually counted volume in Lane 1 (veh/min), whereas the y-axis describes the EQ detector data in Lane 1 (veh/min). Each data point represents a one-minute time period; the $R^2$ value is shown on the plot, represented by the blue line, and is approximately $R^2 = 0.56$. 
+The data collected on August 17, 2020 were first analyzed to determine whether the detectors were accurate. Several plots of the detector data for that day are shown below. First, this plot in Figure 1 shows a comparison between the manually counted volume and the detector recorded volume at each minute period in the far left lane (which may be described as lane "1" throughout the remainder of this report). The x-axis describes the excessive queue detector manually counted volume in Lane 1 (veh/min), whereas the y-axis describes the EQ detector data in Lane 1 (veh/min). Each data point represents a one-minute time period; the $R^2$ value is shown on the plot, represented by the blue line, and is approximately $R^2 = 0.56$. 
 
 ```{r layton_08_17_2020 Lane 1 EQ, warning=FALSE, message=FALSE, results=FALSE}
 
@@ -38,7 +38,7 @@ eq1 <- ggplot(layton_08_17_2020,aes(Manual_EQ_1,Auto_EQ_1)) + geom_jitter() +
   print(eq1)
 ```
 
-The following plot describes a similar comparison between the manual counts and the detector volumes, but using the data from the "middle lane", referred to as "Lane 2". As can be seen, the $R^2$ value equals $0.50$ here, slightly worse than the correlation that was shown in Lane 1.
+The following plot in Figure 2 describes a similar comparison between the manual counts and the detector volumes, but using the data from the "middle lane", referred to as "Lane 2". As can be seen, the $R^2$ value equals $0.50$ here, slightly worse than the correlation that was shown in Lane 1.
 
 ```{r layton_08_17_2020 Lane 2 EQ, warning=FALSE, message=FALSE, results=FALSE}
 
@@ -51,7 +51,7 @@ eq2 <- ggplot(layton_08_17_2020,aes(Manual_EQ_2,Auto_EQ_2)) + geom_jitter() +
 print(eq2)
 ```
 
-As mentioned throughout the literature review portion of this report, the detection is known to be prone to error. In the case of this ramp, at the time of the data collection, though there is an excessive queue detector present in the right lane (Lane 3), the detection was not yet configured. This therefore means that no volumes were being recorded at the EQ 3 detector. To counteract this issue, a general measure of accuracy of Lane 3 can still be calculated to some degree by using the intermediate queue detector in Lane 2. This requires that the assumption be made that the sum of the manually counted EQ volumes in Lanes 2 and 3 equal what would be the manually counted value at the IQ detector in Lane 2. However, this is likely a realistic assumption because the IQ detector is located soon after the gore point, which would likely prevent from significant movement of vehicles otherwise. With this assumption in mind, the sum of the EQ manually counted volumes from Lanes 2 and 3 are compared with the detector data from the IQ detector in Lane 2. As seen in this plot, the $R^2$ value is the highest of the three results thus far, at $R^2 = 0.76$. 
+As mentioned throughout the literature review portion of this report, the detection is known to be prone to error. In the case of this ramp, at the time of the data collection, though there is an excessive queue detector present in the right lane (Lane 3), the detection was not yet configured. This therefore means that no volumes were being recorded at the EQ 3 detector. To counteract this issue, a general measure of accuracy of Lane 3 can still be calculated to some degree by using the intermediate queue detector in Lane 2. This requires that the assumption be made that the sum of the manually counted EQ volumes in Lanes 2 and 3 equal what would be the manually counted value at the IQ detector in Lane 2. However, this is likely a realistic assumption because the IQ detector is located soon after the gore point, which would likely prevent from significant movement of vehicles otherwise. With this assumption in mind, the sum of the EQ manually counted volumes from Lanes 2 and 3 are compared with the detector data from the IQ detector in Lane 2. As seen in this plot in Figure 3, the $R^2$ value is the highest of the three results thus far, at $R^2 = 0.76$. 
 
 ```{r layton_08_17_2020 Lane 2 IQ vs. Manual EQ 2+3, warning=FALSE, message=FALSE, results=FALSE}
 
@@ -64,7 +64,7 @@ iq2 <- ggplot(layton_08_17_2020,aes(Manual_EQ_2.3,Auto_IQ_2)) + geom_jitter() +
 print(iq2)
 ```
 
-As a final measure of the accuracy of the detector data, the EQ detector data was compared against the IQ detector data in the same lane, Lane 1. Following the previous assumption of the vehicles mostly remaining in this lane between the EQ and IQ detectors, the plot below gives the results. As can be seen, $R^2 = 0.72$, which is also acceptable.
+As a final measure of the accuracy of the detector data, the EQ detector data was compared against the IQ detector data in the same lane, Lane 1. Following the previous assumption of the vehicles mostly remaining in this lane between the EQ and IQ detectors, the plot below in Figure 4 gives the results. As can be seen, $R^2 = 0.72$, which is also acceptable.
 
 ```{r layton_08_17_2020 Lane 1 EQ vs IQ, warning=FALSE, message=FALSE, results=FALSE}
 
@@ -80,7 +80,7 @@ print(q1)
 
 Overall, these four measures of the quality of the detector data show that, while the detectors are not perfect, they provide somewhat reasonable results as a beginning point. However, upon further analysis of the data, it was discovered that the time recordings of the detector data and the manually counted data were different. In this case, the detector data is approximately 60-120 seconds behind the field collected data. This would likely account for some of the error that was seen above, when comparing the detector data to the field data.
 
-A method was developed (see below) that seeks to automatically align the two data sets. The methodology seen below allows for only a three minute buffer in either direction--moving the field data as much as three minutes earlier or three minutes later than it was originally recorded. The data used to make this adjustment is from Lane 1. Though still not perfect, the plot shown below compares the lead/lag time-adjusted field counts to the detector data, and the two data sets resemble each other well throughout the data collection period 4:00 PM to 6:30 PM. 
+A method was developed (see below) that seeks to automatically align the two data sets. The methodology seen below allows for only a three minute buffer in either direction--moving the field data as much as three minutes earlier or three minutes later than it was originally recorded. The data used to make this adjustment is from Lane 1. Though still not perfect, the plot shown below in Figure 5 compares the lead/lag time-adjusted field counts to the detector data, and the two data sets resemble each other well throughout the data collection period 4:00 PM to 6:30 PM. 
 
 ```{r layton_08_17_20 Manual vs. Lead/Lag, warning=FALSE, message=FALSE}
 
@@ -121,7 +121,7 @@ layton_08_17_2020 %>%
   )
 ```
 
-With this methodology developed, the Conservation Model and Kalman Filter Model may now be more accurately used to predict the queue length on the ramp. The volume-balancing ratio $C$ for this time period was determined to be approximately $1.67$ by using a Goal Seek function on Microsoft Excel. While, as explained in the literature review, the Kalman filtering coefficient, $K = 0.22$. $L_E$, the effective vehicle length, was assumed to be $24 ft$, per Wu et al. (2009). The approximated ramp length, which was measured using Google Earth, was found to be $L_R = 537 ft$. Using this information, the field data, and the detector data, both the Conservation Model and the Kalman Filter model can be developed. The figure below shows that there remains some work to be done to further refine the balanced conservation model, but this plot does provide some telling information about how the model does somewhat reflect the field collected data.
+With this methodology developed, the Conservation Model and Kalman Filter Model may now be more accurately used to predict the queue length on the ramp. The volume-balancing ratio $C$ for this time period was determined to be approximately $1.67$ by using a Goal Seek function on Microsoft Excel. While, as explained in the literature review, the Kalman filtering coefficient, $K = 0.22$. The effective vehicle length, $L_E$, was assumed to be $24 ft$, per Wu et al. (2009). The approximated ramp length, which was measured using Google Earth, was found to be $L_R = 537 ft$. Using this information, the field data, and the detector data, both the Conservation Model and the Kalman Filter model can be developed. Figure 6 below shows that there remains some work to be done to further refine the balanced conservation model, but this plot does provide some telling information about how the model does somewhat reflect the field collected data.
 
 ```{r layton_08_17_2020 Manual vs. Conservation Model, warning=FALSE, message=FALSE}
 
@@ -136,7 +136,7 @@ ggplot(aes(x = `Start time`, y = `Queue Size`, color = `Legend`)) +
 
 ```
 
-The Kalman filter model vs. the field collected data is shown in the plot below. Because the Kalman filter model is strongly based on the Conservation Model, the two plots strongly resemble one another. However, with the additional factor with the $K$ coefficient, the Kalman filter model seeks to improve on the Conservation model.
+The Kalman filter model vs. the field collected data is shown in the plot below. Because the Kalman filter model is strongly based on the Conservation Model, the two plots strongly resemble one another. However, with the additional factor with the $K$ coefficient, the Kalman filter model seeks to improve on the Conservation model. Figure 7 shows the anticipated queue size versus the field recorded queue size.
 
 ```{r layton_08_17_2020 Manual vs. Kalman Filter Model, warning=FALSE, message=FALSE}
 
@@ -150,3 +150,5 @@ ggplot(aes(x = `Start time`, y = `Queue Size`, color = `Legend`)) +
 
 
 ```
+
+In many cases in both the Conservation Model and the Kalman Filter Model, the anticipated queue size is 0. This leads to underestimating the expected queue length on a majority of the time periods throughout the data collected on August 17, 2020. Further research is recommended to determine the reasoning behind this, and seek to find a correction to this issue with the algorithm. 
